@@ -9,8 +9,11 @@
 
 <style>
 :root{
-  --insta: linear-gradient(45deg,#833AB4,#C13584,#E1306C,#FD1D1D,#F56040,#FCAF45,#FFDC80);
-  --neon-red:#ff2e2e;
+  --primary:#ff2e2e;
+  --secondary:#000000;
+  --bg-gradient:linear-gradient(135deg,#8B0000,#000 40%,#000 60%,#8B0000);
+  --tile-border:linear-gradient(45deg,#ff2e2e,#000);
+  --text-anim:linear-gradient(270deg,#ffffff,#ff2e2e,#ffffff);
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -18,113 +21,83 @@ body{
   font-family:'Poppins',sans-serif;
   color:white;
   overflow-x:hidden;
+  transition:0.5s ease;
 }
 
-/* Background animated diagonal wave */
+/* Animated Background */
 body::before{
   content:"";
   position:fixed;
   inset:0;
-  background:linear-gradient(135deg,#8B0000,#000 40%,#000 60%,#8B0000);
+  background:var(--bg-gradient);
   background-size:400% 400%;
-  animation:bgMove 18s ease infinite;
+  animation:bgFlow 20s ease infinite;
   z-index:-1;
 }
-@keyframes bgMove{
+@keyframes bgFlow{
   0%{background-position:0% 0%;}
   50%{background-position:100% 100%;}
   100%{background-position:0% 0%;}
 }
 
-/* LOGIN */
-#loginPage{
-  height:100vh;
+/* THEME SWITCH */
+.theme-switch{
+  position:fixed;
+  top:20px;
+  right:20px;
   display:flex;
-  justify-content:center;
   align-items:center;
-}
-.login-box{
-  padding:45px;
-  border-radius:20px;
-  backdrop-filter:blur(15px);
-  background:rgba(0,0,0,0.6);
-  border:2px solid transparent;
-  border-image:var(--insta) 1;
-  text-align:center;
-}
-.login-user{
-  font-size:22px;
-  font-weight:600;
-  background:var(--insta);
-  -webkit-background-clip:text;
-  color:transparent;
+  gap:10px;
   cursor:pointer;
-  transition:0.3s;
+  z-index:999;
 }
-.login-user:hover{transform:scale(1.08);}
-.login-note{margin-top:12px;opacity:0.85;}
-
-/* PORTFOLIO */
-#portfolio{display:none;padding:30px;max-width:1200px;margin:auto;}
+.theme-label{font-size:14px;opacity:0.8;}
+.theme-circle{
+  width:18px;height:18px;border-radius:50%;
+  background:var(--tile-border);
+  border:2px solid white;
+}
 
 /* PROFILE */
-.profile{text-align:center;margin-bottom:30px;}
+.profile{text-align:center;margin:80px 0 30px;}
 .profile img{
   width:140px;height:140px;border-radius:50%;
-  padding:4px;background:var(--insta);object-fit:cover;
+  padding:4px;background:var(--tile-border);
+  object-fit:cover;
 }
 .profile h1{
-  margin-top:15px;
   font-family:'ADLaM Display',cursive;
-  font-size:30px;
-  color:var(--neon-red);
-  text-shadow:0 0 12px var(--neon-red);
+  font-size:32px;
+  background:var(--text-anim);
+  -webkit-background-clip:text;
+  color:transparent;
+  animation:textSweep 6s linear infinite;
 }
 .profile p{margin-top:10px;font-size:16px;opacity:0.9;}
 
-/* TOP BUTTONS */
-.top-tiles{
-  display:flex;gap:20px;justify-content:center;
-  flex-wrap:wrap;margin-top:25px;
-}
-.rect-tile{
-  padding:15px 35px;
-  border-radius:15px;
-  background:rgba(255,255,255,0.05);
-  border:2px solid transparent;
-  border-image:var(--insta) 1;
-  cursor:pointer;
-  font-size:18px;
-  transition:0.4s;
-}
-.rect-tile:hover{
-  background:rgba(255,255,255,0.08);
-  box-shadow:0 0 18px var(--neon-red);
-  transform:translateY(-4px);
-}
-
-/* Divider */
-.divider{
-  height:2px;
-  background:linear-gradient(to right,transparent,#ff2e2e,transparent);
-  margin:35px 0;
-}
-
 /* GRID */
-.grid{display:grid;gap:25px;}
-@media(min-width:768px){.grid{grid-template-columns:repeat(3,1fr);}}
-@media(max-width:767px){.grid{grid-template-columns:1fr;}}
+.grid{
+  display:grid;
+  gap:25px;
+  max-width:1100px;
+  margin:auto;
+}
+@media(min-width:768px){
+  .grid{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:767px){
+  .grid{grid-template-columns:1fr;}
+}
 
 .tile{
   height:160px;
   border-radius:20px;
-  background:rgba(0,0,0,0.5);
+  background:rgba(0,0,0,0.6);
   display:flex;
   justify-content:center;
   align-items:center;
   font-family:'ADLaM Display',cursive;
   font-size:20px;
-  letter-spacing:2px;
   cursor:pointer;
   position:relative;
   transition:0.4s ease;
@@ -135,24 +108,25 @@ body::before{
   inset:0;
   border-radius:20px;
   padding:2px;
-  background:var(--insta);
+  background:var(--tile-border);
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
   -webkit-mask-composite:xor;
   mask-composite:exclude;
 }
 .tile:hover{
-  transform:scale(1.06);
-  box-shadow:0 0 25px var(--neon-red);
+  transform:scale(1.07);
+  box-shadow:0 0 30px var(--primary);
 }
-
-/* Animated red-black text sweep */
 .tile span{
-  background:linear-gradient(270deg,black,var(--neon-red),black);
+  background:var(--text-anim);
   background-size:400% 400%;
   -webkit-background-clip:text;
   color:transparent;
-  animation:textSweep 6s linear infinite;
+  animation:textSweep 5s linear infinite;
+  transition:0.3s;
 }
+
+/* Text animation */
 @keyframes textSweep{
   0%{background-position:100%;}
   100%{background-position:-100%;}
@@ -160,17 +134,21 @@ body::before{
 
 /* MODAL */
 .modal{
-  position:fixed;inset:0;
+  position:fixed;
+  inset:0;
   background:rgba(0,0,0,0.85);
-  backdrop-filter:blur(10px);
-  display:none;justify-content:center;align-items:center;
+  backdrop-filter:blur(12px);
+  display:none;
+  justify-content:center;
+  align-items:center;
   z-index:9999;
 }
 .modal.active{display:flex;}
 
 .modal-card{
-  width:350px;height:460px;
-  perspective:1200px;
+  width:360px;
+  height:460px;
+  perspective:1300px;
 }
 .card-inner{
   width:100%;height:100%;
@@ -181,15 +159,19 @@ body::before{
 .card-inner.flip{transform:rotateY(180deg);}
 
 .card-front,.card-back{
-  position:absolute;width:100%;height:100%;
+  position:absolute;
+  width:100%;height:100%;
   border-radius:20px;
   backface-visibility:hidden;
-  display:flex;justify-content:center;align-items:center;
-  padding:25px;text-align:center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:25px;
+  text-align:center;
 }
 .card-front{
   background:rgba(255,255,255,0.08);
-  box-shadow:0 0 25px var(--neon-red);
+  box-shadow:0 0 35px var(--primary);
   font-family:'ADLaM Display',cursive;
   font-size:24px;
 }
@@ -199,58 +181,56 @@ body::before{
   overflow:auto;
 }
 .close-btn{
-  position:absolute;top:20px;right:30px;
-  font-size:22px;cursor:pointer;
+  position:absolute;
+  top:20px;
+  right:30px;
+  cursor:pointer;
+  font-size:22px;
 }
 
-/* Message form */
-input,textarea{
-  width:100%;padding:10px;margin:8px 0;
-  border-radius:8px;border:none;
+/* THEME CLASSES */
+.theme-red{
+  --primary:#ff2e2e;
+  --secondary:#000;
+  --bg-gradient:linear-gradient(135deg,#8B0000,#000 40%,#000 60%,#8B0000);
+  --tile-border:linear-gradient(45deg,#ff2e2e,#000);
+  --text-anim:linear-gradient(270deg,#ffffff,#ff2e2e,#ffffff);
 }
-button{
-  padding:10px 20px;
-  background:var(--insta);
-  border:none;border-radius:8px;
-  cursor:pointer;
-  margin-top:10px;
+.theme-insta{
+  --primary:#C13584;
+  --bg-gradient:linear-gradient(135deg,#833AB4,#C13584,#E1306C,#FD1D1D,#FCAF45);
+  --tile-border:linear-gradient(45deg,#833AB4,#E1306C,#FCAF45);
+  --text-anim:linear-gradient(270deg,#ffffff,#ffffff,#ffffff);
+}
+.theme-blue{
+  --primary:#00aaff;
+  --bg-gradient:linear-gradient(135deg,#001f3f,#000 40%,#000 60%,#001f3f);
+  --tile-border:linear-gradient(45deg,#00aaff,#000);
+  --text-anim:linear-gradient(270deg,#00aaff,#ffffff,#00aaff);
 }
 </style>
 </head>
 
-<body>
+<body class="theme-red">
 
-<div id="loginPage">
-  <div class="login-box">
-    <h2>User ID</h2>
-    <div class="login-user" onclick="enterPortfolio()">@SruthikaaBala</div>
-    <p class="login-note">Login to the above user ID to experience the profile</p>
-  </div>
+<div class="theme-switch" onclick="switchTheme()">
+  <div class="theme-label">Theme</div>
+  <div class="theme-circle"></div>
 </div>
 
-<div id="portfolio">
-  <div class="profile">
-    <img src="portfolio picture.jpg">
-    <h1>Sruthikaa Bala</h1>
-    <p>Digital marketing aspirant transitioning from executive assistance at McKinsey.</p>
-  </div>
+<div class="profile">
+  <img src="portfolio picture.jpg">
+  <h1>Sruthikaa Bala</h1>
+  <p>Digital marketing aspirant transitioning from executive assistance at McKinsey.</p>
+</div>
 
-  <div class="top-tiles">
-    <div class="rect-tile" onclick="openContact()">Contact</div>
-    <div class="rect-tile" onclick="openMessage()">Message</div>
-    <div class="rect-tile" onclick="openResume()">Resume</div>
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="grid">
-    <div class="tile" onclick="openTile('EDUCATION','Your education details here')"><span>EDUCATION</span></div>
-    <div class="tile" onclick="openTile('EXPERIENCE','Your experience details here')"><span>EXPERIENCE</span></div>
-    <div class="tile" onclick="openTile('SKILLS','Your skills here')"><span>SKILLS</span></div>
-    <div class="tile" onclick="openTile('PROJECTS','Projects here')"><span>PROJECTS</span></div>
-    <div class="tile" onclick="openTile('CERTIFICATIONS','Certifications here')"><span>CERTIFICATIONS</span></div>
-    <div class="tile" onclick="openTile('ACHIEVEMENTS','Achievements here')"><span>ACHIEVEMENTS</span></div>
-  </div>
+<div class="grid">
+  <div class="tile" onclick="openTile('EDUCATION','Education details here')"><span>EDUCATION</span></div>
+  <div class="tile" onclick="openTile('EXPERIENCE','Experience details here')"><span>EXPERIENCE</span></div>
+  <div class="tile" onclick="openTile('SKILLS','Skills here')"><span>SKILLS</span></div>
+  <div class="tile" onclick="openTile('PROJECTS','Projects here')"><span>PROJECTS</span></div>
+  <div class="tile" onclick="openTile('CERTIFICATIONS','Certifications here')"><span>CERTIFICATIONS</span></div>
+  <div class="tile" onclick="openTile('ACHIEVEMENTS','Achievements here')"><span>ACHIEVEMENTS</span></div>
 </div>
 
 <div class="modal" id="modal">
@@ -264,9 +244,13 @@ button{
 </div>
 
 <script>
-function enterPortfolio(){
-  loginPage.style.display="none";
-  portfolio.style.display="block";
+let themes=["theme-red","theme-insta","theme-blue"];
+let current=0;
+
+function switchTheme(){
+  document.body.classList.remove(themes[current]);
+  current=(current+1)%themes.length;
+  document.body.classList.add(themes[current]);
 }
 
 let modal=document.getElementById("modal");
@@ -282,31 +266,6 @@ function openTile(title,content){
   cardInner.classList.remove("flip");
 
   setTimeout(()=>{cardInner.classList.add("flip");},1000);
-}
-
-function openContact(){
-  modal.classList.add("active");
-  cardFront.innerText="Contact";
-  cardBack.innerHTML="Email: your@email.com<br>Phone: +91 XXXXXXXX";
-  setTimeout(()=>{cardInner.classList.add("flip");},800);
-}
-
-function openMessage(){
-  modal.classList.add("active");
-  cardFront.innerText="Message";
-  cardBack.innerHTML=`
-  <input placeholder="Your name">
-  <input placeholder="Your email">
-  <textarea rows="4" placeholder="Type your message"></textarea>
-  <button>Send</button>`;
-  setTimeout(()=>{cardInner.classList.add("flip");},800);
-}
-
-function openResume(){
-  modal.classList.add("active");
-  cardFront.innerText="Resume";
-  cardBack.innerHTML="Resume file will be added here.";
-  setTimeout(()=>{cardInner.classList.add("flip");},800);
 }
 
 function closeModal(){

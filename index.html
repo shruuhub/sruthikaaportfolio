@@ -3,308 +3,343 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sruthikaa Bala | Portfolio</title>
+<title>Sruthikaa Bala</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=ADLaM+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --insta: linear-gradient(45deg,#833ab4,#c13584,#fd1d1d,#f56040,#fcb045);
+:root {
+  --insta-gradient: linear-gradient(45deg, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #FCAF45, #FFDC80);
+  --neon-red: #ff2e2e;
 }
 
-/* Background animated red-black wave */
-body{
-  margin:0;
-  font-family:'Poppins',sans-serif;
-  color:#fff;
-  min-height:100vh;
-  background: linear-gradient(135deg,#2b0000,#000,#400000,#000);
-  background-size:400% 400%;
-  animation:bgmove 12s ease infinite;
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@keyframes bgmove{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: black;
+  overflow-x: hidden;
+  color: white;
 }
 
-/* LOGIN */
-#login{
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
+/* Animated Netflix-style Background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #8B0000, #000000 40%, #000000 60%, #8B0000);
+  background-size: 300% 300%;
+  animation: bgMove 12s linear infinite;
+  z-index: -1;
 }
 
-.user-id{
-  font-size:28px;
-  font-weight:500;
-  cursor:pointer;
-  background:var(--insta);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  transition:0.3s;
+@keyframes bgMove {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
 }
 
-.user-id:hover{
-  transform:scale(1.1);
+/* Login Page */
+#loginPage {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.note{
-  opacity:0.7;
-  margin-top:10px;
+.login-box {
+  padding: 40px;
+  border-radius: 20px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(15px);
+  text-align: center;
+  border: 2px solid;
+  border-image: var(--insta-gradient) 1;
 }
 
-/* PROFILE */
-#profile{
-  display:none;
-  max-width:1100px;
-  margin:auto;
-  padding:60px 20px;
+.login-box h2 {
+  margin-bottom: 15px;
+  font-weight: 500;
 }
 
-.profile-header{
-  display:flex;
-  align-items:center;
-  gap:40px;
+.login-user {
+  font-size: 22px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--insta-gradient);
+  -webkit-background-clip: text;
+  color: transparent;
+  transition: 0.3s ease;
 }
 
-.profile-pic{
-  width:150px;
-  height:150px;
-  border-radius:50%;
-  padding:4px;
-  background:var(--insta);
+.login-user:hover {
+  transform: scale(1.1);
 }
 
-.profile-pic img{
-  width:100%;
-  height:100%;
-  border-radius:50%;
-  object-fit:cover;
+/* Portfolio */
+#portfolio {
+  display: none;
+  padding: 30px;
+  max-width: 1200px;
+  margin: auto;
 }
 
-.profile-info h1{
-  margin-bottom:10px;
+/* Profile Section */
+.profile {
+  text-align: center;
 }
 
-.profile-bio{
-  max-width:500px;
-  opacity:0.8;
-  margin-bottom:20px;
+.profile img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  padding: 4px;
+  background: var(--insta-gradient);
+  object-fit: cover;
 }
 
-/* BUTTON TILES */
-.action-row{
-  display:flex;
-  gap:20px;
+.profile h1 {
+  margin-top: 15px;
+  font-family: 'ADLaM Display', cursive;
+  font-size: 28px;
+  color: var(--neon-red);
+  text-shadow: 0 0 10px var(--neon-red);
 }
 
-.tile-btn{
-  padding:15px 25px;
-  border-radius:20px;
-  font-family:'ADLaM Display',cursive;
-  font-size:18px;
-  cursor:pointer;
-  background:#111;
-  position:relative;
-  transition:0.3s;
-  color:#ff3b3b;
-  text-shadow:0 0 8px #ff0000;
+.profile p {
+  margin-top: 10px;
+  font-size: 16px;
+  opacity: 0.9;
 }
 
-.tile-btn:hover{
-  background:var(--insta);
-  color:#fff;
-  box-shadow:0 0 20px red;
-  transform:translateY(-5px) scale(1.05);
+/* Rectangular Tiles */
+.top-tiles {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 25px;
+  flex-wrap: wrap;
 }
 
-.divider{
-  margin:40px 0;
-  height:2px;
-  background:linear-gradient(to right,transparent,red,transparent);
+.rect-tile {
+  padding: 15px 30px;
+  border-radius: 15px;
+  background: var(--insta-gradient);
+  color: var(--neon-red);
+  font-size: 18px;
+  text-shadow: 0 0 10px var(--neon-red);
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:25px;
+.rect-tile:hover {
+  box-shadow: 0 0 20px var(--neon-red);
+  transform: translateY(-5px);
 }
 
-.post{
-  height:180px;
-  border-radius:25px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-family:'ADLaM Display',cursive;
-  font-size:20px;
-  text-transform:uppercase;
-  background:#111;
-  cursor:pointer;
-  position:relative;
-  color:#ff3b3b;
-  text-shadow:0 0 8px red;
-  transition:0.3s;
+/* Divider */
+.divider {
+  height: 2px;
+  background: var(--insta-gradient);
+  margin: 30px 0;
 }
 
-.post:hover{
-  background:var(--insta);
-  color:#fff;
-  box-shadow:0 0 25px red;
-  transform:scale(1.07);
+/* Main Tiles Grid */
+.grid {
+  display: grid;
+  gap: 25px;
 }
 
-/* TAROT MODAL */
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.9);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity:0;
-  pointer-events:none;
-  transition:0.3s;
+/* Laptop 3x2 */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-.modal.active{
-  opacity:1;
-  pointer-events:auto;
+/* Mobile */
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-.card{
-  width:400px;
-  height:500px;
-  perspective:1000px;
+.tile {
+  height: 160px;
+  border-radius: 18px;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'ADLaM Display', cursive;
+  font-size: 20px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: 0.4s ease;
 }
 
-.inner{
-  width:100%;
-  height:100%;
-  position:relative;
-  transition:transform 0.8s;
-  transform-style:preserve-3d;
+.tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  padding: 2px;
+  background: var(--insta-gradient);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
 }
 
-.card.flip .inner{
-  transform:rotateY(180deg);
+.tile span {
+  color: var(--neon-red);
+  text-shadow: 0 0 10px var(--neon-red);
+  z-index: 1;
 }
 
-.front,.back{
-  position:absolute;
-  width:100%;
-  height:100%;
-  border-radius:25px;
-  backface-visibility:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  text-align:center;
+/* Hover Effects */
+.tile:hover {
+  transform: scale(1.05);
+  background: var(--insta-gradient);
+  box-shadow: 0 0 25px var(--neon-red);
 }
 
-.front{
-  background:var(--insta);
-  font-family:'ADLaM Display',cursive;
-  font-size:22px;
+/* Modal Tarot Flip */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
 }
 
-.back{
-  background:#111;
-  transform:rotateY(180deg);
-  overflow:auto;
+.modal-card {
+  width: 350px;
+  height: 450px;
+  perspective: 1000px;
 }
 
-.close{
-  position:absolute;
-  top:20px;
-  right:30px;
-  cursor:pointer;
-  font-size:18px;
+.card-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  position: relative;
 }
 
-@media(max-width:900px){
-  .grid{grid-template-columns:repeat(2,1fr);}
+.flip .card-inner {
+  transform: rotateY(180deg);
 }
 
-@media(max-width:600px){
-  .grid{grid-template-columns:1fr;}
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--insta-gradient);
+  color: black;
+  padding: 20px;
+  text-align: center;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  background: black;
+  color: white;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 22px;
+  cursor: pointer;
 }
 </style>
 </head>
 
 <body>
 
-<section id="login">
-  <div>
-    <div>User ID</div>
-    <div class="user-id" onclick="enterSite()">@SruthikaaBala</div>
-    <div class="note">Please select your user ID to login</div>
+<!-- Login -->
+<div id="loginPage">
+  <div class="login-box">
+    <h2>User ID</h2>
+    <div class="login-user" onclick="enterPortfolio()">@SruthikaaBala</div>
+    <p style="margin-top:10px;">Please select your user ID to login</p>
   </div>
-</section>
+</div>
 
-<section id="profile">
-  <div class="profile-header">
-    <div class="profile-pic">
-      <img src="portfolio picture.jpg" alt="Sruthikaa Bala">
-    </div>
-    <div class="profile-info">
-      <h1>Sruthikaa Bala</h1>
-      <div class="profile-bio">
-        Executive assistant transitioning into digital marketing with a focus on growth strategy and brand positioning.
-      </div>
+<!-- Portfolio -->
+<div id="portfolio">
 
-      <div class="action-row">
-        <div class="tile-btn" onclick="openCard('Contact','Email: yourmail@email.com')">Contact</div>
-        <div class="tile-btn" onclick="openCard('Message','You can integrate backend later.')">Message</div>
-        <div class="tile-btn" onclick="openCard('Resume','Resume upload link here.')">Resume</div>
-      </div>
-    </div>
-  </div>
+<div class="profile">
+  <img src="portfolio picture.jpg" alt="Profile Picture">
+  <h1>Sruthikaa Bala</h1>
+  <p>Digital marketing aspirant transitioning from executive assistance at McKinsey. Focused on brand strategy, content and premium positioning.</p>
+</div>
 
-  <div class="divider"></div>
+<div class="top-tiles">
+  <div class="rect-tile">Contact</div>
+  <div class="rect-tile">Message</div>
+  <div class="rect-tile">Resume</div>
+</div>
 
-  <div class="grid">
-    <div class="post" onclick="openCard('Education','BBA in International Business.')">Education</div>
-    <div class="post" onclick="openCard('Experience','Executive assistant at McKinsey & Company.')">Experience</div>
-    <div class="post" onclick="openCard('Skills','Digital marketing, SQL, communication.')">Skills</div>
-    <div class="post" onclick="openCard('Projects','Brand strategy initiatives.')">Projects</div>
-    <div class="post" onclick="openCard('Certifications','Google digital marketing certification.')">Certifications</div>
-    <div class="post" onclick="openCard('Achievements','Selected at McKinsey.')">Achievements</div>
-  </div>
-</section>
+<div class="divider"></div>
 
+<div class="grid">
+  <div class="tile" onclick="openModal('Education details here')"><span>EDUCATION</span></div>
+  <div class="tile" onclick="openModal('Experience details here')"><span>EXPERIENCE</span></div>
+  <div class="tile" onclick="openModal('Skills details here')"><span>SKILLS</span></div>
+  <div class="tile" onclick="openModal('Projects details here')"><span>PROJECTS</span></div>
+  <div class="tile" onclick="openModal('Certifications here')"><span>CERTIFICATIONS</span></div>
+  <div class="tile" onclick="openModal('Achievements here')"><span>ACHIEVEMENTS</span></div>
+</div>
+
+</div>
+
+<!-- Modal -->
 <div class="modal" id="modal">
-  <div class="close" onclick="closeCard()">✕</div>
-  <div class="card" id="card">
-    <div class="inner">
-      <div class="front" id="cardTitle"></div>
-      <div class="back" id="cardContent"></div>
+  <div class="close-btn" onclick="closeModal()">✕</div>
+  <div class="modal-card" id="modalCard">
+    <div class="card-inner">
+      <div class="card-front">Loading...</div>
+      <div class="card-back" id="modalContent"></div>
     </div>
   </div>
 </div>
 
 <script>
-function enterSite(){
-  document.getElementById("login").style.display="none";
-  document.getElementById("profile").style.display="block";
+function enterPortfolio() {
+  document.getElementById("loginPage").style.display = "none";
+  document.getElementById("portfolio").style.display = "block";
 }
 
-function openCard(title,content){
-  document.getElementById("cardTitle").innerText=title;
-  document.getElementById("cardContent").innerHTML="<div>"+content+"</div>";
-  document.getElementById("modal").classList.add("active");
-  setTimeout(()=>{document.getElementById("card").classList.add("flip");},300);
+function openModal(content) {
+  const modal = document.getElementById("modal");
+  const modalCard = document.getElementById("modalCard");
+  document.getElementById("modalContent").innerText = content;
+  modal.style.display = "flex";
+  setTimeout(() => modalCard.classList.add("flip"), 200);
 }
 
-function closeCard(){
-  document.getElementById("card").classList.remove("flip");
-  setTimeout(()=>{document.getElementById("modal").classList.remove("active");},400);
+function closeModal() {
+  const modal = document.getElementById("modal");
+  const modalCard = document.getElementById("modalCard");
+  modalCard.classList.remove("flip");
+  setTimeout(() => modal.style.display = "none", 600);
 }
 </script>
 

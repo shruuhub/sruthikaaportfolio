@@ -5,379 +5,436 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sruthikaa Bala</title>
 
-<link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 
+/* ================= ROOT VARIABLES ================= */
+
 :root{
-  --bg1:#000;
-  --bg2:#7a0000;
-  --tile-outline:#ff0033;
-  --tile-text:#fff;
-  --neon:#ff0033;
-  --glass:rgba(255,255,255,0.06);
+  --primary:#ff2e2e;
+  --bg-gradient:linear-gradient(135deg,#8B0000,#000 50%,#8B0000);
+  --text-gradient:linear-gradient(90deg,#fff,#ff2e2e,#000);
+  --outline-gradient:linear-gradient(45deg,#ff2e2e,#000);
 }
 
-/* ---------------- GLOBAL ---------------- */
+/* ================= RESET ================= */
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
+*{margin:0;padding:0;box-sizing:border-box;}
 body{
   font-family:'Poppins',sans-serif;
-  min-height:100vh;
+  color:white;
   overflow-x:hidden;
-  background:linear-gradient(135deg,var(--bg2),#000 40%,#000 60%,var(--bg2));
+}
+
+/* ================= BACKGROUND ================= */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:var(--bg-gradient);
   background-size:300% 300%;
-  animation:bgMove 12s ease-in-out infinite alternate;
-  transition:background 0.6s ease;
+  animation:bgMove 16s ease infinite alternate;
+  z-index:-2;
 }
 
 @keyframes bgMove{
-  0%{background-position:100% 0%}
-  100%{background-position:0% 100%}
+  0%{background-position:100% 0%;}
+  50%{background-position:0% 100%;}
+  100%{background-position:100% 0%;}
 }
 
-/* Blur lock */
+/* ================= LOGIN SCREEN ================= */
+
+.login-screen{
+  position:fixed;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  backdrop-filter:blur(10px);
+  z-index:9999;
+}
+
+.login-box{
+  text-align:center;
+  padding:40px;
+  border-radius:20px;
+  background:rgba(0,0,0,0.6);
+  border:2px solid transparent;
+  border-image:var(--outline-gradient) 1;
+  box-shadow:0 0 30px var(--primary);
+  cursor:pointer;
+}
+
+.login-box img{
+  width:130px;height:130px;
+  border-radius:50%;
+  object-fit:cover;
+  padding:4px;
+  background:var(--outline-gradient);
+  margin-bottom:20px;
+}
+
+.login-box h2{
+  font-family:'ADLaM Display',cursive;
+  margin-bottom:10px;
+}
+
+.login-box p{
+  opacity:0.85;
+}
+
+/* ================= MAIN CONTAINER ================= */
+
+.main{
+  display:none;
+  max-width:1000px;
+  margin:auto;
+  padding:40px 20px;
+}
+
 .blur{
-  filter:blur(10px);
+  filter:blur(8px);
   pointer-events:none;
 }
 
-/* ---------------- HEADER ---------------- */
+/* ================= THEME DROPDOWN ================= */
 
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px 8%;
+.theme-select{
+  position:absolute;
+  right:20px;
+  top:20px;
 }
 
-h1{
+select{
+  padding:6px 10px;
+  border-radius:8px;
+}
+
+/* ================= PROFILE ================= */
+
+.profile{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.profile img{
+  width:140px;height:140px;
+  border-radius:50%;
+  object-fit:cover;
+  padding:4px;
+  background:var(--outline-gradient);
+}
+
+.profile h1{
   font-family:'ADLaM Display',cursive;
-  font-size:32px;
-  background:linear-gradient(90deg,#ff0000,#000);
+  font-size:28px;
+  margin-top:10px;
+  background:var(--text-gradient);
   -webkit-background-clip:text;
   color:transparent;
+  background-size:200%;
+  animation:textMove 6s linear infinite;
 }
 
-.theme-selector select{
-  padding:6px 12px;
-  border-radius:20px;
-  border:1px solid var(--tile-outline);
-  background:black;
-  color:white;
-  outline:none;
+@keyframes textMove{
+  0%{background-position:0%;}
+  100%{background-position:200%;}
 }
-
-/* ---------------- ABOUT ---------------- */
 
 .about{
   text-align:center;
-  max-width:700px;
-  margin:30px auto;
-  line-height:1.6;
+  margin-top:15px;
+  margin-bottom:25px;
 }
 
-/* ---------------- TILES ---------------- */
+/* ================= SMALL RECT TILES ================= */
 
-.tiles{
+.top-tiles{
+  display:flex;
+  justify-content:center;
+  gap:25px;
+  flex-wrap:wrap;
+  margin-bottom:25px;
+}
+
+.small-tile{
+  padding:10px 24px;
+  border-radius:14px;
+  background:rgba(0,0,0,0.5);
+  border:2px solid transparent;
+  border-image:var(--outline-gradient) 1;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.small-tile:hover{
+  box-shadow:0 0 20px var(--primary);
+}
+
+/* ================= DIVIDER ================= */
+
+.divider{
+  height:2px;
+  background:linear-gradient(to right,transparent,var(--primary),transparent);
+  margin:30px 0;
+}
+
+/* ================= MAIN GRID ================= */
+
+.grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:30px;
-  padding:40px 10%;
+  max-width:800px;
+  margin:auto;
+}
+
+@media(min-width:768px){
+  .grid{grid-template-columns:repeat(3,1fr);}
 }
 
 .tile{
-  height:130px;
+  height:120px;
   border-radius:18px;
-  border:2px solid var(--tile-outline);
-  background:var(--glass);
+  background:rgba(0,0,0,0.6);
   display:flex;
-  align-items:center;
   justify-content:center;
-  cursor:pointer;
-  transition:0.4s ease;
+  align-items:center;
   position:relative;
-  overflow:hidden;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.tile::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:18px;
+  padding:2px;
+  background:var(--outline-gradient);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+}
+
+.tile:hover{
+  box-shadow:0 0 25px var(--primary);
 }
 
 .tile span{
   font-family:'ADLaM Display',cursive;
-  font-size:20px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  transition:0.4s ease;
-  background:linear-gradient(90deg,#fff,#ff0000);
-  -webkit-background-clip:text;
-  color:transparent;
+  display:inline-block;
 }
 
-/* Shine effect */
-.tile:hover span{
-  transform:scale(1.15);
-  text-shadow:0 0 12px var(--neon);
-}
-
-/* Neon glow */
-.tile:hover{
-  box-shadow:0 0 25px var(--neon);
-  background:linear-gradient(135deg,rgba(255,0,100,0.15),rgba(255,150,0,0.12));
-}
-
-/* ---------------- CARD MODAL ---------------- */
+/* ================= MODAL TAROT ================= */
 
 .modal{
   position:fixed;
   inset:0;
-  display:flex;
+  display:none;
   justify-content:center;
   align-items:center;
-  background:rgba(0,0,0,0.7);
-  opacity:0;
-  pointer-events:none;
-  transition:0.4s ease;
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(10px);
+  z-index:9999;
 }
 
-.modal.active{
-  opacity:1;
-  pointer-events:all;
-}
+.modal.active{display:flex;}
 
 .card{
-  width:90%;
-  max-width:420px;
-  height:260px;
-  perspective:1000px;
+  width:340px;
+  height:440px;
+  perspective:1200px;
 }
 
 .card-inner{
-  width:100%;
-  height:100%;
+  width:100%;height:100%;
   position:relative;
   transform-style:preserve-3d;
-  transition:1s cubic-bezier(.25,.8,.25,1);
+  transition:transform 0.8s ease;
 }
 
-.card.flip .card-inner{
-  transform:rotateY(180deg);
-}
+.card-inner.flip{transform:rotateY(180deg);}
 
 .card-face{
   position:absolute;
-  width:100%;
-  height:100%;
-  border-radius:18px;
-  background:linear-gradient(135deg,rgba(255,0,100,0.2),rgba(255,150,0,0.15));
-  box-shadow:0 0 25px var(--neon);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  width:100%;height:100%;
+  border-radius:20px;
   backface-visibility:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   padding:20px;
+  text-align:center;
+  background:rgba(0,0,0,0.8);
+  box-shadow:0 0 30px var(--primary);
 }
 
-.card-back{
-  transform:rotateY(180deg);
-  font-size:14px;
-  line-height:1.6;
+.card-back{transform:rotateY(180deg);}
+
+.close{
+  position:absolute;
+  top:20px;right:25px;
+  cursor:pointer;
+  font-size:20px;
 }
 
-/* ---------------- CONTACT BOX ---------------- */
+/* ================= POPUP ================= */
 
-.popup-box{
+.popup{
   position:fixed;
-  top:50%;
-  left:50%;
+  top:50%;left:50%;
   transform:translate(-50%,-50%) scale(0.6);
-  width:90%;
-  max-width:400px;
-  background:rgba(0,0,0,0.85);
-  border-radius:16px;
-  border:2px solid var(--tile-outline);
-  padding:20px;
+  width:320px;
+  padding:25px;
+  background:rgba(0,0,0,0.9);
+  border-radius:20px;
+  border:2px solid transparent;
+  border-image:var(--outline-gradient) 1;
+  box-shadow:0 0 25px var(--primary);
   opacity:0;
-  transition:0.4s ease;
-  box-shadow:0 0 25px var(--neon);
+  transition:0.4s;
+  z-index:9999;
 }
 
-.popup-box.active{
+.popup.active{
   opacity:1;
   transform:translate(-50%,-50%) scale(1);
 }
 
-.close-btn{
-  text-align:right;
-  cursor:pointer;
-  font-weight:600;
-}
-
-/* ---------------- SAKURA ---------------- */
-
-.sakura-bg{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  background:url('https://images.unsplash.com/photo-1526481280698-8fcc13fd6a3b') center/cover no-repeat;
-  opacity:0;
-  transition:0.6s ease;
-}
-
-.petal{
-  position:fixed;
-  width:12px;
-  height:12px;
-  background:pink;
-  border-radius:50%;
-  opacity:0.7;
-  animation:fall 8s linear infinite;
-}
-
-@keyframes fall{
-  0%{transform:translateY(-10vh) translateX(0)}
-  100%{transform:translateY(110vh) translateX(50px)}
-}
-
-/* Responsive */
-@media(max-width:768px){
-  .tiles{
-    padding:20px;
-  }
-  .tile{
-    height:110px;
-  }
-}
-
 </style>
 </head>
+
 <body>
 
-<div class="sakura-bg"></div>
+<!-- LOGIN -->
+<div class="login-screen" id="login">
+<div class="login-box" onclick="enterSite()">
+<img src="portfolio picture.jpg">
+<h2>@sruthikaabala</h2>
+<p>Enter this profile to explore the ambition behind the story.</p>
+</div>
+</div>
 
-<header>
-<h1>Sruthikaa Bala</h1>
-<div class="theme-selector">
-<select id="themeSelect">
-<option value="red">Red Black</option>
+<!-- MAIN -->
+<div class="main" id="mainContent">
+
+<div class="theme-select">
+<select onchange="changeTheme(this.value)">
+<option value="red">Neon Red</option>
 <option value="insta">Instagram</option>
-<option value="blue">Blue Black</option>
-<option value="sakura">Sakura</option>
+<option value="blue">Blue Neon</option>
 </select>
 </div>
-</header>
 
-<section class="about">
-<p>A results-driven professional blending strategy, operations, and creative execution. Structured thinking. Strong communication. Calm under pressure.</p>
-</section>
+<div class="profile">
+<img src="portfolio picture.jpg">
+<h1>Sruthikaa Bala</h1>
+</div>
 
-<section class="tiles">
-<div class="tile" onclick="openCard('Education')"><span>Education</span></div>
-<div class="tile" onclick="openCard('Experience')"><span>Experience</span></div>
-<div class="tile" onclick="openCard('Skills')"><span>Skills</span></div>
-<div class="tile" onclick="openPopup('Contact details here')"><span>Contact</span></div>
-<div class="tile" onclick="openPopup('Message form coming soon')"><span>Message</span></div>
-<div class="tile" onclick="openPopup('Resume will be added soon')"><span>Resume</span></div>
-</section>
+<div class="about">
+Strategic professional transitioning from executive operations into digital growth systems.
+</div>
 
+<div class="top-tiles">
+<div class="small-tile" onclick="openPopup('Email: you@email.com')">Contact</div>
+<div class="small-tile" onclick="openPopup('Message form coming soon')">Message</div>
+<div class="small-tile" onclick="openPopup('Resume will be added soon')">Resume</div>
+</div>
+
+<div class="divider"></div>
+
+<div class="grid">
+<div class="tile" onclick="openCard('EDUCATION','Education details here')"><span>EDUCATION</span></div>
+<div class="tile" onclick="openCard('EXPERIENCE','Experience details here')"><span>EXPERIENCE</span></div>
+<div class="tile" onclick="openCard('SKILLS','Skills details')"><span>SKILLS</span></div>
+<div class="tile" onclick="openCard('PROJECTS','Projects')"><span>PROJECTS</span></div>
+<div class="tile" onclick="openCard('CERTIFICATIONS','Certifications')"><span>CERTIFICATIONS</span></div>
+<div class="tile" onclick="openCard('ACHIEVEMENTS','Achievements')"><span>ACHIEVEMENTS</span></div>
+</div>
+
+</div>
+
+<!-- TAROT MODAL -->
 <div class="modal" id="modal">
-<div class="card" id="card">
-<div class="card-inner">
+<div class="close" onclick="closeModal()">✕</div>
+<div class="card">
+<div class="card-inner" id="cardInner">
 <div class="card-face" id="cardFront"></div>
-<div class="card-face card-back">Detailed content goes here.</div>
+<div class="card-face card-back" id="cardBack"></div>
 </div>
 </div>
 </div>
 
-<div class="popup-box" id="popup">
-<div class="close-btn" onclick="closePopup()">Close</div>
+<!-- POPUP -->
+<div class="popup" id="popupBox">
+<div style="text-align:right;cursor:pointer;" onclick="closePopup()">✕</div>
 <div id="popupContent"></div>
 </div>
 
 <script>
 
-const modal=document.getElementById("modal");
-const card=document.getElementById("card");
-const cardFront=document.getElementById("cardFront");
-const body=document.body;
-
-function openCard(title){
-  card.classList.remove("flip");
-  cardFront.innerHTML="<h2>"+title+"</h2>";
-  modal.classList.add("active");
-  body.classList.add("blur");
-
-  setTimeout(()=>{
-    card.classList.add("flip");
-  },1000);
+/* LOGIN */
+function enterSite(){
+document.getElementById("login").style.display="none";
+document.getElementById("mainContent").style.display="block";
 }
 
-modal.onclick=()=>{
-  modal.classList.remove("active");
-  body.classList.remove("blur");
-  card.classList.remove("flip");
+/* TAROT */
+let modal=document.getElementById("modal");
+let cardInner=document.getElementById("cardInner");
+let cardFront=document.getElementById("cardFront");
+let cardBack=document.getElementById("cardBack");
+
+function openCard(title,content){
+modal.classList.add("active");
+document.getElementById("mainContent").classList.add("blur");
+cardFront.innerText=title;
+cardBack.innerText=content;
+cardInner.classList.remove("flip");
+setTimeout(()=>{cardInner.classList.add("flip");},500);
 }
 
-function openPopup(text){
-  document.getElementById("popupContent").innerText=text;
-  document.getElementById("popup").classList.add("active");
-  body.classList.add("blur");
+function closeModal(){
+cardInner.classList.remove("flip");
+modal.classList.remove("active");
+document.getElementById("mainContent").classList.remove("blur");
 }
 
+/* POPUP */
+function openPopup(content){
+document.getElementById("popupContent").innerText=content;
+document.getElementById("popupBox").classList.add("active");
+document.getElementById("mainContent").classList.add("blur");
+}
 function closePopup(){
-  document.getElementById("popup").classList.remove("active");
-  body.classList.remove("blur");
+document.getElementById("popupBox").classList.remove("active");
+document.getElementById("mainContent").classList.remove("blur");
 }
 
 /* THEMES */
-
-document.getElementById("themeSelect").addEventListener("change",function(){
-  const val=this.value;
-  const root=document.documentElement;
-  document.querySelector(".sakura-bg").style.opacity=0;
-  removePetals();
-
-  if(val==="red"){
-    root.style.setProperty("--bg2","#7a0000");
-    root.style.setProperty("--tile-outline","#ff0033");
-    root.style.setProperty("--neon","#ff0033");
-  }
-
-  if(val==="insta"){
-    root.style.setProperty("--bg2","#833ab4");
-    root.style.setProperty("--tile-outline","#fd1d1d");
-    root.style.setProperty("--neon","#fd1d1d");
-  }
-
-  if(val==="blue"){
-    root.style.setProperty("--bg2","#001f7a");
-    root.style.setProperty("--tile-outline","#00aaff");
-    root.style.setProperty("--neon","#00aaff");
-  }
-
-  if(val==="sakura"){
-    root.style.setProperty("--bg2","#ff9ecf");
-    root.style.setProperty("--tile-outline","#ff69b4");
-    root.style.setProperty("--neon","#ff69b4");
-    document.querySelector(".sakura-bg").style.opacity=0.4;
-    createPetals();
-  }
-});
-
-function createPetals(){
-  for(let i=0;i<20;i++){
-    const petal=document.createElement("div");
-    petal.className="petal";
-    petal.style.left=Math.random()*100+"vw";
-    petal.style.animationDuration=5+Math.random()*5+"s";
-    document.body.appendChild(petal);
-  }
+function changeTheme(theme){
+if(theme==="red"){
+document.documentElement.style.setProperty("--primary","#ff2e2e");
+document.documentElement.style.setProperty("--bg-gradient","linear-gradient(135deg,#8B0000,#000 50%,#8B0000)");
+document.documentElement.style.setProperty("--outline-gradient","linear-gradient(45deg,#ff2e2e,#000)");
+document.documentElement.style.setProperty("--text-gradient","linear-gradient(90deg,#fff,#ff2e2e,#000)");
 }
-
-function removePetals(){
-  document.querySelectorAll(".petal").forEach(p=>p.remove());
+if(theme==="insta"){
+document.documentElement.style.setProperty("--primary","#E1306C");
+document.documentElement.style.setProperty("--bg-gradient","linear-gradient(135deg,#833AB4,#E1306C,#FCAF45)");
+document.documentElement.style.setProperty("--outline-gradient","linear-gradient(45deg,#833AB4,#E1306C,#FCAF45)");
+document.documentElement.style.setProperty("--text-gradient","linear-gradient(90deg,#833AB4,#E1306C,#FCAF45)");
+}
+if(theme==="blue"){
+document.documentElement.style.setProperty("--primary","#00aaff");
+document.documentElement.style.setProperty("--bg-gradient","linear-gradient(135deg,#001f3f,#000 50%,#001f3f)");
+document.documentElement.style.setProperty("--outline-gradient","linear-gradient(45deg,#00aaff,#000)");
+document.documentElement.style.setProperty("--text-gradient","linear-gradient(90deg,#00aaff,#fff,#000)");
+}
 }
 
 </script>

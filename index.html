@@ -8,128 +8,117 @@
 <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --insta-gradient: linear-gradient(45deg, #833AB4, #C13584, #E1306C, #FD1D1D, #F56040, #FCAF45, #FFDC80);
-  --neon-red: #ff2e2e;
+:root{
+  --insta: linear-gradient(45deg,#833AB4,#C13584,#E1306C,#FD1D1D,#F56040,#FCAF45,#FFDC80);
+  --neon-red:#ff2e2e;
 }
 
-/* Reset */
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-  font-family: 'Poppins', sans-serif;
-  overflow-x: hidden;
-  color: white;
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Poppins',sans-serif;
+  color:white;
+  overflow-x:hidden;
 }
 
-/* Background animated diagonal red-black wave */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(135deg,#8B0000,#000 40%,#000 60%,#8B0000);
-  background-size: 400% 400%;
-  animation: bgMove 20s linear infinite;
-  z-index: -1;
+/* Background animated diagonal wave */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:linear-gradient(135deg,#8B0000,#000 40%,#000 60%,#8B0000);
+  background-size:400% 400%;
+  animation:bgMove 18s ease infinite;
+  z-index:-1;
 }
-
 @keyframes bgMove{
-  0% {background-position:0% 0%;}
-  25% {background-position:100% 100%;}
-  50% {background-position:0% 100%;}
-  75% {background-position:100% 0%;}
-  100% {background-position:0% 0%;}
+  0%{background-position:0% 0%;}
+  50%{background-position:100% 100%;}
+  100%{background-position:0% 0%;}
 }
 
-/* LOGIN PAGE */
-#loginPage {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* LOGIN */
+#loginPage{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
-
-.login-box {
-  padding: 40px;
-  border-radius: 20px;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(15px);
-  text-align: center;
-  border: 2px solid;
-  border-image: var(--insta-gradient) 1;
+.login-box{
+  padding:45px;
+  border-radius:20px;
+  backdrop-filter:blur(15px);
+  background:rgba(0,0,0,0.6);
+  border:2px solid transparent;
+  border-image:var(--insta) 1;
+  text-align:center;
 }
-
-.login-box h2 { margin-bottom: 15px; font-weight: 500; }
-.login-user {
-  font-size: 22px;
-  font-weight: 600;
-  cursor: pointer;
-  background: var(--insta-gradient);
-  -webkit-background-clip: text;
-  color: transparent;
-  transition: 0.3s ease;
+.login-user{
+  font-size:22px;
+  font-weight:600;
+  background:var(--insta);
+  -webkit-background-clip:text;
+  color:transparent;
+  cursor:pointer;
+  transition:0.3s;
 }
-.login-user:hover { transform: scale(1.1); }
-.login-note { opacity:0.8; margin-top:10px; font-size:0.95rem; }
+.login-user:hover{transform:scale(1.08);}
+.login-note{margin-top:12px;opacity:0.85;}
 
 /* PORTFOLIO */
-#portfolio { display:none; padding:30px; max-width:1200px; margin:auto; }
+#portfolio{display:none;padding:30px;max-width:1200px;margin:auto;}
 
 /* PROFILE */
-.profile { text-align:center; margin-bottom:30px; }
-.profile img {
-  width:140px; height:140px;
-  border-radius:50%;
-  padding:4px;
-  background: var(--insta-gradient);
-  object-fit:cover;
+.profile{text-align:center;margin-bottom:30px;}
+.profile img{
+  width:140px;height:140px;border-radius:50%;
+  padding:4px;background:var(--insta);object-fit:cover;
 }
-.profile h1 {
+.profile h1{
   margin-top:15px;
   font-family:'ADLaM Display',cursive;
-  font-size:28px;
-  color: var(--neon-red);
-  text-shadow: 0 0 10px var(--neon-red);
+  font-size:30px;
+  color:var(--neon-red);
+  text-shadow:0 0 12px var(--neon-red);
 }
-.profile p {
-  margin-top:10px;
-  font-size:16px;
-  opacity:0.9;
-}
+.profile p{margin-top:10px;font-size:16px;opacity:0.9;}
 
-/* TOP RECTANGLE TILES */
-.top-tiles { display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-top:25px; }
-.rect-tile {
-  padding:15px 30px;
-  border-radius:15px;
-  background: rgba(0,0,0,0.3);
-  border:2px solid var(--insta-gradient);
-  color: var(--neon-red);
-  font-size:18px;
-  text-shadow: 0 0 8px var(--neon-red);
-  cursor:pointer;
-  transition: 0.3s ease;
+/* TOP BUTTONS */
+.top-tiles{
+  display:flex;gap:20px;justify-content:center;
+  flex-wrap:wrap;margin-top:25px;
 }
-.rect-tile:hover {
-  background: rgba(255,255,255,0.1);
-  color:white;
-  font-weight:bold;
-  box-shadow: 0 0 15px var(--neon-red);
-  transform: translateY(-5px);
+.rect-tile{
+  padding:15px 35px;
+  border-radius:15px;
+  background:rgba(255,255,255,0.05);
+  border:2px solid transparent;
+  border-image:var(--insta) 1;
+  cursor:pointer;
+  font-size:18px;
+  transition:0.4s;
+}
+.rect-tile:hover{
+  background:rgba(255,255,255,0.08);
+  box-shadow:0 0 18px var(--neon-red);
+  transform:translateY(-4px);
 }
 
 /* Divider */
-.divider { height:2px; background: linear-gradient(to right,transparent,red,transparent); margin:30px 0; }
+.divider{
+  height:2px;
+  background:linear-gradient(to right,transparent,#ff2e2e,transparent);
+  margin:35px 0;
+}
 
-/* MAIN GRID TILES */
-.grid { display:grid; gap:25px; }
-@media (min-width:768px){ .grid{grid-template-columns:repeat(3,1fr);} }
-@media (max-width:767px){ .grid{grid-template-columns:1fr;} }
+/* GRID */
+.grid{display:grid;gap:25px;}
+@media(min-width:768px){.grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:767px){.grid{grid-template-columns:1fr;}}
 
-.tile {
+.tile{
   height:160px;
-  border-radius:18px;
-  background: rgba(0,0,0,0.5);
+  border-radius:20px;
+  background:rgba(0,0,0,0.5);
   display:flex;
   justify-content:center;
   align-items:center;
@@ -138,95 +127,99 @@ body::before {
   letter-spacing:2px;
   cursor:pointer;
   position:relative;
-  overflow:hidden;
   transition:0.4s ease;
 }
-.tile::before {
+.tile::before{
   content:"";
   position:absolute;
   inset:0;
-  border-radius:18px;
+  border-radius:20px;
   padding:2px;
-  background: var(--insta-gradient);
-  -webkit-mask: linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  background:var(--insta);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
 }
-.tile span {
-  color: var(--neon-red);
-  text-shadow:0 0 10px var(--neon-red);
-  z-index:1;
-}
-.tile:hover {
-  transform: scale(1.05);
-  background: rgba(255,255,255,0.1); /* subtle instagram gradient fill */
+.tile:hover{
+  transform:scale(1.06);
   box-shadow:0 0 25px var(--neon-red);
-  color:white;
-  font-weight:bold;
 }
 
-/* MODAL / TAROT CARD */
-.modal {
-  position: fixed;
-  inset:0;
-  background: rgba(0,0,0,0.85);
-  display: none;
-  justify-content:center;
-  align-items:center;
-  backdrop-filter:blur(8px);
-  pointer-events: auto;
-  z-index: 9999;
+/* Animated red-black text sweep */
+.tile span{
+  background:linear-gradient(270deg,black,var(--neon-red),black);
+  background-size:400% 400%;
+  -webkit-background-clip:text;
+  color:transparent;
+  animation:textSweep 6s linear infinite;
+}
+@keyframes textSweep{
+  0%{background-position:100%;}
+  100%{background-position:-100%;}
 }
 
-.modal.active { display:flex; }
+/* MODAL */
+.modal{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.85);
+  backdrop-filter:blur(10px);
+  display:none;justify-content:center;align-items:center;
+  z-index:9999;
+}
+.modal.active{display:flex;}
 
-.modal-card { width:350px; height:450px; perspective:1000px; }
-.card-inner {
-  width:100%; height:100%;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
+.modal-card{
+  width:350px;height:460px;
+  perspective:1200px;
+}
+.card-inner{
+  width:100%;height:100%;
   position:relative;
+  transform-style:preserve-3d;
+  transition:transform 1s cubic-bezier(.4,.2,.2,1);
 }
-.card-inner.flip { transform:rotateY(180deg); }
+.card-inner.flip{transform:rotateY(180deg);}
 
-.card-front, .card-back {
-  position:absolute;
-  width:100%; height:100%;
+.card-front,.card-back{
+  position:absolute;width:100%;height:100%;
   border-radius:20px;
   backface-visibility:hidden;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  text-align:center;
+  display:flex;justify-content:center;align-items:center;
+  padding:25px;text-align:center;
 }
-.card-front {
-  background: rgba(255,255,255,0.1);
+.card-front{
+  background:rgba(255,255,255,0.08);
+  box-shadow:0 0 25px var(--neon-red);
   font-family:'ADLaM Display',cursive;
-  font-size:22px;
-  color:white;
+  font-size:24px;
 }
-.card-back { 
-  background:black; 
-  color:white;
+.card-back{
+  background:black;
   transform:rotateY(180deg);
   overflow:auto;
 }
-.close-btn {
-  position:absolute;
-  top:20px;
-  right:25px;
-  font-size:22px;
+.close-btn{
+  position:absolute;top:20px;right:30px;
+  font-size:22px;cursor:pointer;
+}
+
+/* Message form */
+input,textarea{
+  width:100%;padding:10px;margin:8px 0;
+  border-radius:8px;border:none;
+}
+button{
+  padding:10px 20px;
+  background:var(--insta);
+  border:none;border-radius:8px;
   cursor:pointer;
-  color:white;
-  font-weight:bold;
+  margin-top:10px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
 <div id="loginPage">
   <div class="login-box">
     <h2>User ID</h2>
@@ -235,38 +228,36 @@ body::before {
   </div>
 </div>
 
-<!-- PORTFOLIO -->
 <div id="portfolio">
   <div class="profile">
-    <img src="portfolio picture.jpg" alt="Profile Picture">
+    <img src="portfolio picture.jpg">
     <h1>Sruthikaa Bala</h1>
-    <p>Digital marketing aspirant transitioning from executive assistance at McKinsey. Focused on brand strategy, content and premium positioning.</p>
+    <p>Digital marketing aspirant transitioning from executive assistance at McKinsey.</p>
   </div>
 
   <div class="top-tiles">
-    <div class="rect-tile" onclick="openModal('Contact info here')">Contact</div>
-    <div class="rect-tile" onclick="openModal('Message info here')">Message</div>
-    <div class="rect-tile" onclick="openModal('Resume link/info')">Resume</div>
+    <div class="rect-tile" onclick="openContact()">Contact</div>
+    <div class="rect-tile" onclick="openMessage()">Message</div>
+    <div class="rect-tile" onclick="openResume()">Resume</div>
   </div>
 
   <div class="divider"></div>
 
   <div class="grid">
-    <div class="tile" onclick="openModal('Education details here')"><span>EDUCATION</span></div>
-    <div class="tile" onclick="openModal('Experience details here')"><span>EXPERIENCE</span></div>
-    <div class="tile" onclick="openModal('Skills details here')"><span>SKILLS</span></div>
-    <div class="tile" onclick="openModal('Projects details here')"><span>PROJECTS</span></div>
-    <div class="tile" onclick="openModal('Certifications here')"><span>CERTIFICATIONS</span></div>
-    <div class="tile" onclick="openModal('Achievements here')"><span>ACHIEVEMENTS</span></div>
+    <div class="tile" onclick="openTile('EDUCATION','Your education details here')"><span>EDUCATION</span></div>
+    <div class="tile" onclick="openTile('EXPERIENCE','Your experience details here')"><span>EXPERIENCE</span></div>
+    <div class="tile" onclick="openTile('SKILLS','Your skills here')"><span>SKILLS</span></div>
+    <div class="tile" onclick="openTile('PROJECTS','Projects here')"><span>PROJECTS</span></div>
+    <div class="tile" onclick="openTile('CERTIFICATIONS','Certifications here')"><span>CERTIFICATIONS</span></div>
+    <div class="tile" onclick="openTile('ACHIEVEMENTS','Achievements here')"><span>ACHIEVEMENTS</span></div>
   </div>
 </div>
 
-<!-- MODAL -->
 <div class="modal" id="modal">
   <div class="close-btn" onclick="closeModal()">✕</div>
   <div class="modal-card">
     <div class="card-inner" id="cardInner">
-      <div class="card-front" id="cardFront">Loading...</div>
+      <div class="card-front" id="cardFront"></div>
       <div class="card-back" id="cardBack"></div>
     </div>
   </div>
@@ -274,29 +265,54 @@ body::before {
 
 <script>
 function enterPortfolio(){
-  document.getElementById("loginPage").style.display="none";
-  document.getElementById("portfolio").style.display="block";
+  loginPage.style.display="none";
+  portfolio.style.display="block";
 }
 
-let modal = document.getElementById("modal");
-let cardInner = document.getElementById("cardInner");
-let cardFront = document.getElementById("cardFront");
-let cardBack = document.getElementById("cardBack");
+let modal=document.getElementById("modal");
+let cardInner=document.getElementById("cardInner");
+let cardFront=document.getElementById("cardFront");
+let cardBack=document.getElementById("cardBack");
 
-function openModal(content){
-  modal.classList.add('active');
-  cardFront.innerText = content.split(' ')[0]; // title
-  cardBack.innerText = content; // details
-  cardInner.classList.add('flip');
+function openTile(title,content){
+  modal.classList.add("active");
+  document.body.style.overflow="hidden";
+  cardFront.innerText=title;
+  cardBack.innerText=content;
+  cardInner.classList.remove("flip");
 
-  // Disable scrolling/interactions on background
-  document.body.style.overflow = 'hidden';
+  setTimeout(()=>{cardInner.classList.add("flip");},1000);
+}
+
+function openContact(){
+  modal.classList.add("active");
+  cardFront.innerText="Contact";
+  cardBack.innerHTML="Email: your@email.com<br>Phone: +91 XXXXXXXX";
+  setTimeout(()=>{cardInner.classList.add("flip");},800);
+}
+
+function openMessage(){
+  modal.classList.add("active");
+  cardFront.innerText="Message";
+  cardBack.innerHTML=`
+  <input placeholder="Your name">
+  <input placeholder="Your email">
+  <textarea rows="4" placeholder="Type your message"></textarea>
+  <button>Send</button>`;
+  setTimeout(()=>{cardInner.classList.add("flip");},800);
+}
+
+function openResume(){
+  modal.classList.add("active");
+  cardFront.innerText="Resume";
+  cardBack.innerHTML="Resume file will be added here.";
+  setTimeout(()=>{cardInner.classList.add("flip");},800);
 }
 
 function closeModal(){
-  cardInner.classList.remove('flip');
-  setTimeout(()=>{ modal.classList.remove('active'); },500);
-  document.body.style.overflow = 'auto';
+  cardInner.classList.remove("flip");
+  setTimeout(()=>{modal.classList.remove("active");},500);
+  document.body.style.overflow="auto";
 }
 </script>
 

@@ -8,343 +8,378 @@
 <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+
 :root{
-  --primary:#ff2e2e;
-  --bg:linear-gradient(135deg,#8B0000,#000 50%,#8B0000);
-  --border-gradient:linear-gradient(45deg,#ff2e2e,#000);
-  --text-gradient:linear-gradient(270deg,#fff,#ff2e2e,#fff);
+  --bg1:#000;
+  --bg2:#7a0000;
+  --tile-outline:#ff0033;
+  --tile-text:#fff;
+  --neon:#ff0033;
+  --glass:rgba(255,255,255,0.06);
 }
 
-/* Reset */
-*{margin:0;padding:0;box-sizing:border-box;}
+/* ---------------- GLOBAL ---------------- */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
 body{
   font-family:'Poppins',sans-serif;
-  color:white;
+  min-height:100vh;
   overflow-x:hidden;
-  transition:0.4s ease;
+  background:linear-gradient(135deg,var(--bg2),#000 40%,#000 60%,var(--bg2));
+  background-size:300% 300%;
+  animation:bgMove 12s ease-in-out infinite alternate;
+  transition:background 0.6s ease;
 }
 
-/* Background */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:var(--bg);
-  background-size:400% 400%;
-  animation:bgMove 18s ease infinite;
-  z-index:-2;
-}
 @keyframes bgMove{
-  0%{background-position:0% 0%;}
-  50%{background-position:100% 100%;}
-  100%{background-position:0% 0%;}
+  0%{background-position:100% 0%}
+  100%{background-position:0% 100%}
 }
 
-/* TOKYO skyline overlay */
-.tokyo-bg{
-  position:fixed;
-  inset:0;
-  background:url('https://images.unsplash.com/photo-1549692520-acc6669e2f0c?auto=format&fit=crop&w=1600&q=60') center/cover no-repeat;
-  opacity:0.12;
-  z-index:-1;
-  display:none;
+/* Blur lock */
+.blur{
+  filter:blur(10px);
+  pointer-events:none;
 }
 
-/* Sakura petals */
-.petal{
-  position:fixed;
-  top:-20px;
-  width:10px;height:10px;
-  background:pink;
-  border-radius:50%;
-  opacity:0.7;
-  animation:fall linear infinite;
-}
-@keyframes fall{
-  to{
-    transform:translateY(110vh) translateX(40px);
-  }
+/* ---------------- HEADER ---------------- */
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 8%;
 }
 
-/* Container */
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:40px 20px;
-}
-
-/* Theme dropdown */
-.theme-selector{
-  position:fixed;
-  top:20px;
-  right:20px;
-  z-index:1000;
-}
-select{
-  padding:8px 12px;
-  border-radius:8px;
-  border:none;
-}
-
-/* Profile */
-.profile{text-align:center;margin-bottom:30px;}
-.profile img{
-  width:130px;height:130px;
-  border-radius:50%;
-  padding:4px;
-  background:var(--border-gradient);
-  object-fit:cover;
-}
-.profile h1{
+h1{
   font-family:'ADLaM Display',cursive;
-  font-size:28px;
-  background:var(--text-gradient);
+  font-size:32px;
+  background:linear-gradient(90deg,#ff0000,#000);
   -webkit-background-clip:text;
   color:transparent;
-  animation:textFlow 5s linear infinite;
-}
-@keyframes textFlow{
-  0%{background-position:100%;}
-  100%{background-position:-100%;}
-}
-.profile p{margin-top:10px;opacity:0.9;}
-
-/* Top tiles */
-.top-tiles{
-  display:flex;
-  gap:20px;
-  justify-content:center;
-  margin-top:20px;
-  flex-wrap:wrap;
-}
-.rect-tile{
-  padding:12px 25px;
-  border-radius:12px;
-  background:rgba(255,255,255,0.05);
-  border:2px solid transparent;
-  border-image:var(--border-gradient) 1;
-  cursor:pointer;
-  transition:0.3s;
-}
-.rect-tile:hover{
-  transform:translateY(-4px);
-  box-shadow:0 0 15px var(--primary);
 }
 
-/* Divider */
-.divider{
-  height:2px;
-  background:linear-gradient(to right,transparent,var(--primary),transparent);
-  margin:30px 0;
+.theme-selector select{
+  padding:6px 12px;
+  border-radius:20px;
+  border:1px solid var(--tile-outline);
+  background:black;
+  color:white;
+  outline:none;
 }
 
-/* Grid */
-.grid{
+/* ---------------- ABOUT ---------------- */
+
+.about{
+  text-align:center;
+  max-width:700px;
+  margin:30px auto;
+  line-height:1.6;
+}
+
+/* ---------------- TILES ---------------- */
+
+.tiles{
   display:grid;
-  gap:25px;
-}
-@media(min-width:768px){
-  .grid{grid-template-columns:repeat(3,1fr);}
-}
-@media(max-width:767px){
-  .grid{grid-template-columns:1fr;}
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:30px;
+  padding:40px 10%;
 }
 
 .tile{
-  height:140px;
+  height:130px;
   border-radius:18px;
-  background:rgba(0,0,0,0.6);
+  border:2px solid var(--tile-outline);
+  background:var(--glass);
   display:flex;
-  justify-content:center;
   align-items:center;
-  font-family:'ADLaM Display',cursive;
-  font-size:18px;
-  position:relative;
+  justify-content:center;
   cursor:pointer;
-  transition:0.3s;
-}
-.tile::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:18px;
-  padding:2px;
-  background:var(--border-gradient);
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;
-  mask-composite:exclude;
-}
-.tile span{
-  background:var(--text-gradient);
-  -webkit-background-clip:text;
-  color:transparent;
-  animation:textFlow 6s linear infinite;
-}
-.tile:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 20px var(--primary);
+  transition:0.4s ease;
+  position:relative;
+  overflow:hidden;
 }
 
-/* Modal */
+.tile span{
+  font-family:'ADLaM Display',cursive;
+  font-size:20px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  transition:0.4s ease;
+  background:linear-gradient(90deg,#fff,#ff0000);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+/* Shine effect */
+.tile:hover span{
+  transform:scale(1.15);
+  text-shadow:0 0 12px var(--neon);
+}
+
+/* Neon glow */
+.tile:hover{
+  box-shadow:0 0 25px var(--neon);
+  background:linear-gradient(135deg,rgba(255,0,100,0.15),rgba(255,150,0,0.12));
+}
+
+/* ---------------- CARD MODAL ---------------- */
+
 .modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.85);
-  backdrop-filter:blur(10px);
-  display:none;
+  display:flex;
   justify-content:center;
   align-items:center;
-  z-index:9999;
+  background:rgba(0,0,0,0.7);
+  opacity:0;
+  pointer-events:none;
+  transition:0.4s ease;
 }
-.modal.active{display:flex;}
 
-.modal-card{
-  width:340px;
-  height:440px;
-  perspective:1200px;
+.modal.active{
+  opacity:1;
+  pointer-events:all;
 }
+
+.card{
+  width:90%;
+  max-width:420px;
+  height:260px;
+  perspective:1000px;
+}
+
 .card-inner{
-  width:100%;height:100%;
+  width:100%;
+  height:100%;
   position:relative;
   transform-style:preserve-3d;
-  transition:transform 1s cubic-bezier(.4,.2,.2,1);
+  transition:1s cubic-bezier(.25,.8,.25,1);
 }
-.card-inner.flip{transform:rotateY(180deg);}
-.card-front,.card-back{
-  position:absolute;width:100%;height:100%;
-  border-radius:20px;
-  backface-visibility:hidden;
-  display:flex;justify-content:center;align-items:center;
-  padding:20px;text-align:center;
-}
-.card-front{
-  background:rgba(255,255,255,0.08);
-  box-shadow:0 0 30px var(--primary);
-  font-family:'ADLaM Display',cursive;
-}
-.card-back{
-  background:black;
+
+.card.flip .card-inner{
   transform:rotateY(180deg);
 }
-.close-btn{
-  position:absolute;top:20px;right:25px;
-  cursor:pointer;
+
+.card-face{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:18px;
+  background:linear-gradient(135deg,rgba(255,0,100,0.2),rgba(255,150,0,0.15));
+  box-shadow:0 0 25px var(--neon);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  backface-visibility:hidden;
+  padding:20px;
 }
 
-/* Themes */
-.theme-red{
-  --primary:#ff2e2e;
-  --bg:linear-gradient(135deg,#8B0000,#000 50%,#8B0000);
-  --border-gradient:linear-gradient(45deg,#ff2e2e,#000);
-  --text-gradient:linear-gradient(270deg,#fff,#ff2e2e,#fff);
+.card-back{
+  transform:rotateY(180deg);
+  font-size:14px;
+  line-height:1.6;
 }
-.theme-insta{
-  --primary:#C13584;
-  --bg:linear-gradient(135deg,#833AB4,#E1306C,#FCAF45);
-  --border-gradient:linear-gradient(45deg,#833AB4,#E1306C,#FCAF45);
-  --text-gradient:linear-gradient(270deg,#fff,#fff,#fff);
+
+/* ---------------- CONTACT BOX ---------------- */
+
+.popup-box{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0.6);
+  width:90%;
+  max-width:400px;
+  background:rgba(0,0,0,0.85);
+  border-radius:16px;
+  border:2px solid var(--tile-outline);
+  padding:20px;
+  opacity:0;
+  transition:0.4s ease;
+  box-shadow:0 0 25px var(--neon);
 }
-.theme-blue{
-  --primary:#00aaff;
-  --bg:linear-gradient(135deg,#001f3f,#000 50%,#001f3f);
-  --border-gradient:linear-gradient(45deg,#00aaff,#000);
-  --text-gradient:linear-gradient(270deg,#00aaff,#fff,#00aaff);
+
+.popup-box.active{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1);
 }
-.theme-tokyo{
-  --primary:#ff7eb9;
-  --bg:linear-gradient(135deg,#1a1a1a,#000);
-  --border-gradient:linear-gradient(45deg,#ff7eb9,#fff);
-  --text-gradient:linear-gradient(270deg,#ff7eb9,#fff,#ff7eb9);
+
+.close-btn{
+  text-align:right;
+  cursor:pointer;
+  font-weight:600;
 }
+
+/* ---------------- SAKURA ---------------- */
+
+.sakura-bg{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:url('https://images.unsplash.com/photo-1526481280698-8fcc13fd6a3b') center/cover no-repeat;
+  opacity:0;
+  transition:0.6s ease;
+}
+
+.petal{
+  position:fixed;
+  width:12px;
+  height:12px;
+  background:pink;
+  border-radius:50%;
+  opacity:0.7;
+  animation:fall 8s linear infinite;
+}
+
+@keyframes fall{
+  0%{transform:translateY(-10vh) translateX(0)}
+  100%{transform:translateY(110vh) translateX(50px)}
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .tiles{
+    padding:20px;
+  }
+  .tile{
+    height:110px;
+  }
+}
+
 </style>
 </head>
+<body>
 
-<body class="theme-red">
+<div class="sakura-bg"></div>
 
-<div class="tokyo-bg" id="tokyoBg"></div>
-
+<header>
+<h1>Sruthikaa Bala</h1>
 <div class="theme-selector">
-<select onchange="changeTheme(this.value)">
-<option value="theme-red">Red Neon</option>
-<option value="theme-insta">Instagram</option>
-<option value="theme-blue">Blue Neon</option>
-<option value="theme-tokyo">Tokyo Sakura</option>
+<select id="themeSelect">
+<option value="red">Red Black</option>
+<option value="insta">Instagram</option>
+<option value="blue">Blue Black</option>
+<option value="sakura">Sakura</option>
 </select>
 </div>
+</header>
 
-<div class="container">
+<section class="about">
+<p>A results-driven professional blending strategy, operations, and creative execution. Structured thinking. Strong communication. Calm under pressure.</p>
+</section>
 
-<div class="profile">
-<img src="portfolio picture.jpg">
-<h1>Sruthikaa Bala</h1>
-<p>Digital marketing aspirant transitioning from executive assistance at McKinsey.</p>
-</div>
-
-<div class="top-tiles">
-<div class="rect-tile" onclick="openTile('Contact','Email: you@email.com')">Contact</div>
-<div class="rect-tile" onclick="openTile('Message','Message form here')">Message</div>
-<div class="rect-tile" onclick="openTile('Resume','Resume file will be added')">Resume</div>
-</div>
-
-<div class="divider"></div>
-
-<div class="grid">
-<div class="tile" onclick="openTile('EDUCATION','Education details')"><span>EDUCATION</span></div>
-<div class="tile" onclick="openTile('EXPERIENCE','Experience details')"><span>EXPERIENCE</span></div>
-<div class="tile" onclick="openTile('SKILLS','Skills here')"><span>SKILLS</span></div>
-<div class="tile" onclick="openTile('PROJECTS','Projects here')"><span>PROJECTS</span></div>
-<div class="tile" onclick="openTile('CERTIFICATIONS','Certifications')"><span>CERTIFICATIONS</span></div>
-<div class="tile" onclick="openTile('ACHIEVEMENTS','Achievements')"><span>ACHIEVEMENTS</span></div>
-</div>
-
-</div>
+<section class="tiles">
+<div class="tile" onclick="openCard('Education')"><span>Education</span></div>
+<div class="tile" onclick="openCard('Experience')"><span>Experience</span></div>
+<div class="tile" onclick="openCard('Skills')"><span>Skills</span></div>
+<div class="tile" onclick="openPopup('Contact details here')"><span>Contact</span></div>
+<div class="tile" onclick="openPopup('Message form coming soon')"><span>Message</span></div>
+<div class="tile" onclick="openPopup('Resume will be added soon')"><span>Resume</span></div>
+</section>
 
 <div class="modal" id="modal">
-<div class="close-btn" onclick="closeModal()">✕</div>
-<div class="modal-card">
-<div class="card-inner" id="cardInner">
-<div class="card-front" id="cardFront"></div>
-<div class="card-back" id="cardBack"></div>
+<div class="card" id="card">
+<div class="card-inner">
+<div class="card-face" id="cardFront"></div>
+<div class="card-face card-back">Detailed content goes here.</div>
 </div>
 </div>
+</div>
+
+<div class="popup-box" id="popup">
+<div class="close-btn" onclick="closePopup()">Close</div>
+<div id="popupContent"></div>
 </div>
 
 <script>
-function changeTheme(theme){
-document.body.className=theme;
-document.getElementById("tokyoBg").style.display= theme==="theme-tokyo" ? "block":"none";
-if(theme==="theme-tokyo"){createPetals();}
+
+const modal=document.getElementById("modal");
+const card=document.getElementById("card");
+const cardFront=document.getElementById("cardFront");
+const body=document.body;
+
+function openCard(title){
+  card.classList.remove("flip");
+  cardFront.innerHTML="<h2>"+title+"</h2>";
+  modal.classList.add("active");
+  body.classList.add("blur");
+
+  setTimeout(()=>{
+    card.classList.add("flip");
+  },1000);
 }
+
+modal.onclick=()=>{
+  modal.classList.remove("active");
+  body.classList.remove("blur");
+  card.classList.remove("flip");
+}
+
+function openPopup(text){
+  document.getElementById("popupContent").innerText=text;
+  document.getElementById("popup").classList.add("active");
+  body.classList.add("blur");
+}
+
+function closePopup(){
+  document.getElementById("popup").classList.remove("active");
+  body.classList.remove("blur");
+}
+
+/* THEMES */
+
+document.getElementById("themeSelect").addEventListener("change",function(){
+  const val=this.value;
+  const root=document.documentElement;
+  document.querySelector(".sakura-bg").style.opacity=0;
+  removePetals();
+
+  if(val==="red"){
+    root.style.setProperty("--bg2","#7a0000");
+    root.style.setProperty("--tile-outline","#ff0033");
+    root.style.setProperty("--neon","#ff0033");
+  }
+
+  if(val==="insta"){
+    root.style.setProperty("--bg2","#833ab4");
+    root.style.setProperty("--tile-outline","#fd1d1d");
+    root.style.setProperty("--neon","#fd1d1d");
+  }
+
+  if(val==="blue"){
+    root.style.setProperty("--bg2","#001f7a");
+    root.style.setProperty("--tile-outline","#00aaff");
+    root.style.setProperty("--neon","#00aaff");
+  }
+
+  if(val==="sakura"){
+    root.style.setProperty("--bg2","#ff9ecf");
+    root.style.setProperty("--tile-outline","#ff69b4");
+    root.style.setProperty("--neon","#ff69b4");
+    document.querySelector(".sakura-bg").style.opacity=0.4;
+    createPetals();
+  }
+});
 
 function createPetals(){
-for(let i=0;i<20;i++){
-let petal=document.createElement("div");
-petal.className="petal";
-petal.style.left=Math.random()*100+"vw";
-petal.style.animationDuration=(5+Math.random()*5)+"s";
-document.body.appendChild(petal);
-}
-}
-
-let modal=document.getElementById("modal");
-let cardInner=document.getElementById("cardInner");
-let cardFront=document.getElementById("cardFront");
-let cardBack=document.getElementById("cardBack");
-
-function openTile(title,content){
-modal.classList.add("active");
-document.body.style.overflow="hidden";
-cardFront.innerText=title;
-cardBack.innerText=content;
-cardInner.classList.remove("flip");
-setTimeout(()=>{cardInner.classList.add("flip");},1000);
+  for(let i=0;i<20;i++){
+    const petal=document.createElement("div");
+    petal.className="petal";
+    petal.style.left=Math.random()*100+"vw";
+    petal.style.animationDuration=5+Math.random()*5+"s";
+    document.body.appendChild(petal);
+  }
 }
 
-function closeModal(){
-cardInner.classList.remove("flip");
-setTimeout(()=>{modal.classList.remove("active");},500);
-document.body.style.overflow="auto";
+function removePetals(){
+  document.querySelectorAll(".petal").forEach(p=>p.remove());
 }
+
 </script>
 
 </body>

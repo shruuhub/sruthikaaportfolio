@@ -5,74 +5,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sruthikaa Bala | Portfolio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=ADLaM+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=ADLaM+Display&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --insta-gradient: linear-gradient(45deg,#833ab4,#c13584,#fd1d1d,#f56040,#fcb045);
+  --insta: linear-gradient(45deg,#833ab4,#c13584,#fd1d1d,#f56040,#fcb045);
 }
 
-/* Global */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
+/* Background animated red-black wave */
 body{
+  margin:0;
   font-family:'Poppins',sans-serif;
   color:#fff;
   min-height:100vh;
-  background: radial-gradient(circle at top left, rgba(255,0,0,0.5), transparent 40%),
-              radial-gradient(circle at bottom right, rgba(255,0,0,0.4), transparent 40%),
-              #000;
-  overflow-x:hidden;
+  background: linear-gradient(135deg,#2b0000,#000,#400000,#000);
+  background-size:400% 400%;
+  animation:bgmove 12s ease infinite;
 }
 
-/* Login Screen */
+@keyframes bgmove{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* LOGIN */
 #login{
   height:100vh;
   display:flex;
-  flex-direction:column;
   align-items:center;
   justify-content:center;
-  backdrop-filter:blur(10px);
   text-align:center;
 }
 
-.login-box{
-  padding:40px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.1);
-}
-
-.login-box h2{
-  margin-bottom:20px;
-  font-weight:400;
-}
-
 .user-id{
-  font-size:1.5rem;
+  font-size:28px;
   font-weight:500;
-  background:var(--insta-gradient);
+  cursor:pointer;
+  background:var(--insta);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  cursor:pointer;
-  transition:0.3s ease;
+  transition:0.3s;
 }
 
 .user-id:hover{
   transform:scale(1.1);
 }
 
-.login-note{
-  margin-top:10px;
-  font-size:0.9rem;
+.note{
   opacity:0.7;
+  margin-top:10px;
 }
 
-/* Profile */
+/* PROFILE */
 #profile{
   display:none;
   max-width:1100px;
@@ -82,116 +67,99 @@ body{
 
 .profile-header{
   display:flex;
-  flex-wrap:wrap;
-  gap:40px;
   align-items:center;
-  margin-bottom:40px;
+  gap:40px;
 }
 
 .profile-pic{
-  width:130px;
-  height:130px;
+  width:150px;
+  height:150px;
   border-radius:50%;
   padding:4px;
-  background:var(--insta-gradient);
+  background:var(--insta);
 }
 
-.profile-pic-inner{
+.profile-pic img{
   width:100%;
   height:100%;
   border-radius:50%;
-  background:#111;
+  object-fit:cover;
 }
 
 .profile-info h1{
-  font-size:1.8rem;
-  font-weight:500;
   margin-bottom:10px;
 }
 
 .profile-bio{
   max-width:500px;
-  line-height:1.6;
   opacity:0.8;
+  margin-bottom:20px;
 }
 
-/* Buttons */
-.profile-buttons{
-  margin-top:15px;
+/* BUTTON TILES */
+.action-row{
   display:flex;
-  gap:15px;
-}
-
-.action-btn{
-  padding:10px 20px;
-  border-radius:12px;
-  border:1px solid #333;
-  background:#111;
-  cursor:pointer;
-  transition:0.3s ease;
-}
-
-.action-btn:hover{
-  background:var(--insta-gradient);
-  color:#000;
-  transform:translateY(-3px);
-}
-
-/* Grid */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
   gap:20px;
 }
 
-/* Tiles */
-.post{
-  position:relative;
+.tile-btn{
+  padding:15px 25px;
   border-radius:20px;
-  padding:20px;
-  aspect-ratio:1/1;
+  font-family:'ADLaM Display',cursive;
+  font-size:18px;
+  cursor:pointer;
+  background:#111;
+  position:relative;
+  transition:0.3s;
+  color:#ff3b3b;
+  text-shadow:0 0 8px #ff0000;
+}
+
+.tile-btn:hover{
+  background:var(--insta);
+  color:#fff;
+  box-shadow:0 0 20px red;
+  transform:translateY(-5px) scale(1.05);
+}
+
+.divider{
+  margin:40px 0;
+  height:2px;
+  background:linear-gradient(to right,transparent,red,transparent);
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+}
+
+.post{
+  height:180px;
+  border-radius:25px;
   display:flex;
   align-items:center;
   justify-content:center;
-  text-align:center;
   font-family:'ADLaM Display',cursive;
-  letter-spacing:1px;
-  font-size:0.9rem;
+  font-size:20px;
   text-transform:uppercase;
   background:#111;
   cursor:pointer;
-  transition:0.3s ease;
-}
-
-.post::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:20px;
-  padding:2px;
-  background:var(--insta-gradient);
-  -webkit-mask:
-     linear-gradient(#000 0 0) content-box,
-     linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;
-          mask-composite:exclude;
+  position:relative;
+  color:#ff3b3b;
+  text-shadow:0 0 8px red;
+  transition:0.3s;
 }
 
 .post:hover{
-  transform:scale(1.05);
+  background:var(--insta);
+  color:#fff;
+  box-shadow:0 0 25px red;
+  transform:scale(1.07);
 }
 
-.post:hover::before{
-  animation:instaMove 4s linear infinite;
-  background-size:300%;
-}
-
-@keyframes instaMove{
-  0%{background-position:0%;}
-  100%{background-position:300%;}
-}
-
-/* Modal */
+/* TAROT MODAL */
 .modal{
   position:fixed;
   inset:0;
@@ -201,7 +169,7 @@ body{
   justify-content:center;
   opacity:0;
   pointer-events:none;
-  transition:0.3s ease;
+  transition:0.3s;
 }
 
 .modal.active{
@@ -209,54 +177,63 @@ body{
   pointer-events:auto;
 }
 
-.modal-content{
-  background:#111;
-  border-radius:20px;
-  padding:30px;
-  max-width:600px;
-  width:90%;
-  transform:scale(0.8);
-  transition:0.3s ease;
+.card{
+  width:400px;
+  height:500px;
+  perspective:1000px;
 }
 
-.modal.active .modal-content{
-  transform:scale(1);
-}
-
-.close-btn{
-  text-align:right;
-  cursor:pointer;
-  margin-bottom:15px;
-  opacity:0.7;
-}
-
-.close-btn:hover{
-  opacity:1;
-}
-
-/* Form */
-input,textarea{
+.inner{
   width:100%;
-  padding:10px;
-  margin-bottom:10px;
-  background:#000;
-  border:1px solid #333;
-  color:#fff;
-  border-radius:8px;
+  height:100%;
+  position:relative;
+  transition:transform 0.8s;
+  transform-style:preserve-3d;
 }
 
-button{
-  padding:10px 15px;
-  border:none;
-  border-radius:8px;
-  background:var(--insta-gradient);
+.card.flip .inner{
+  transform:rotateY(180deg);
+}
+
+.front,.back{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:25px;
+  backface-visibility:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  text-align:center;
+}
+
+.front{
+  background:var(--insta);
+  font-family:'ADLaM Display',cursive;
+  font-size:22px;
+}
+
+.back{
+  background:#111;
+  transform:rotateY(180deg);
+  overflow:auto;
+}
+
+.close{
+  position:absolute;
+  top:20px;
+  right:30px;
   cursor:pointer;
-  color:#000;
-  font-weight:500;
+  font-size:18px;
+}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(2,1fr);}
 }
 
 @media(max-width:600px){
-  .profile-header{gap:20px;}
+  .grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -264,46 +241,51 @@ button{
 <body>
 
 <section id="login">
-  <div class="login-box">
-    <h2>User ID</h2>
+  <div>
+    <div>User ID</div>
     <div class="user-id" onclick="enterSite()">@SruthikaaBala</div>
-    <div class="login-note">Please select your user ID to login</div>
+    <div class="note">Please select your user ID to login</div>
   </div>
 </section>
 
 <section id="profile">
   <div class="profile-header">
     <div class="profile-pic">
-      <div class="profile-pic-inner"></div>
+      <img src="portfolio picture.jpg" alt="Sruthikaa Bala">
     </div>
     <div class="profile-info">
       <h1>Sruthikaa Bala</h1>
       <div class="profile-bio">
-        Executive assistant at McKinsey transitioning into digital marketing.
-        Focused on brand positioning, storytelling psychology, and growth strategy.
+        Executive assistant transitioning into digital marketing with a focus on growth strategy and brand positioning.
       </div>
 
-      <div class="profile-buttons">
-        <div class="action-btn" onclick="openModal('contact')">Contact</div>
-        <div class="action-btn" onclick="openModal('message')">Message</div>
+      <div class="action-row">
+        <div class="tile-btn" onclick="openCard('Contact','Email: yourmail@email.com')">Contact</div>
+        <div class="tile-btn" onclick="openCard('Message','You can integrate backend later.')">Message</div>
+        <div class="tile-btn" onclick="openCard('Resume','Resume upload link here.')">Resume</div>
       </div>
     </div>
   </div>
 
+  <div class="divider"></div>
+
   <div class="grid">
-    <div class="post" onclick="openModal('education')">Education</div>
-    <div class="post" onclick="openModal('experience')">Experience</div>
-    <div class="post" onclick="openModal('skills')">Skills</div>
-    <div class="post" onclick="openModal('projects')">Projects</div>
-    <div class="post" onclick="openModal('certifications')">Certifications</div>
-    <div class="post" onclick="openModal('achievements')">Achievements</div>
+    <div class="post" onclick="openCard('Education','BBA in International Business.')">Education</div>
+    <div class="post" onclick="openCard('Experience','Executive assistant at McKinsey & Company.')">Experience</div>
+    <div class="post" onclick="openCard('Skills','Digital marketing, SQL, communication.')">Skills</div>
+    <div class="post" onclick="openCard('Projects','Brand strategy initiatives.')">Projects</div>
+    <div class="post" onclick="openCard('Certifications','Google digital marketing certification.')">Certifications</div>
+    <div class="post" onclick="openCard('Achievements','Selected at McKinsey.')">Achievements</div>
   </div>
 </section>
 
 <div class="modal" id="modal">
-  <div class="modal-content">
-    <div class="close-btn" onclick="closeModal()">Close ✕</div>
-    <div id="modal-body"></div>
+  <div class="close" onclick="closeCard()">✕</div>
+  <div class="card" id="card">
+    <div class="inner">
+      <div class="front" id="cardTitle"></div>
+      <div class="back" id="cardContent"></div>
+    </div>
   </div>
 </div>
 
@@ -313,43 +295,17 @@ function enterSite(){
   document.getElementById("profile").style.display="block";
 }
 
-const modal=document.getElementById("modal");
-const body=document.getElementById("modal-body");
-
-function openModal(type){
-  const content={
-    education:`<h2>Education</h2><p>BBA in International Business.</p>`,
-    experience:`<h2>Experience</h2><p>Executive assistant at McKinsey & Company.</p>`,
-    skills:`<h2>Skills</h2><p>Digital marketing, SQL, communication, content strategy.</p>`,
-    projects:`<h2>Projects</h2><p>Brand positioning simulations and content initiatives.</p>`,
-    certifications:`<h2>Certifications</h2><p>Google digital marketing certification.</p>`,
-    achievements:`<h2>Achievements</h2><p>Selected at McKinsey through competitive rounds.</p>`,
-    contact:`<h2>Contact</h2><p>Email: yourmail@email.com</p><p>LinkedIn: linkedin.com/in/yourprofile</p>`,
-    message:`<h2>Send a message</h2>
-      <form action="mailto:yourmail@email.com" method="POST" enctype="text/plain">
-      <input type="text" name="Name" placeholder="Your name" required>
-      <input type="email" name="Email" placeholder="Your email" required>
-      <textarea name="Message" rows="4" placeholder="Your message" required></textarea>
-      <button type="submit">Send</button>
-      </form>`
-  };
-  body.innerHTML=content[type];
-  modal.classList.add("active");
-  document.body.style.overflow="hidden";
+function openCard(title,content){
+  document.getElementById("cardTitle").innerText=title;
+  document.getElementById("cardContent").innerHTML="<div>"+content+"</div>";
+  document.getElementById("modal").classList.add("active");
+  setTimeout(()=>{document.getElementById("card").classList.add("flip");},300);
 }
 
-function closeModal(){
-  modal.classList.remove("active");
-  document.body.style.overflow="auto";
+function closeCard(){
+  document.getElementById("card").classList.remove("flip");
+  setTimeout(()=>{document.getElementById("modal").classList.remove("active");},400);
 }
-
-modal.addEventListener("click",e=>{
-  if(e.target===modal) closeModal();
-});
-
-document.addEventListener("keydown",e=>{
-  if(e.key==="Escape") closeModal();
-});
 </script>
 
 </body>

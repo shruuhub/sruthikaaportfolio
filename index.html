@@ -14,36 +14,34 @@
 }
 
 /* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin:0; padding:0; box-sizing:border-box; }
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: black;
   overflow-x: hidden;
   color: white;
 }
 
-/* Animated Netflix-style Background */
+/* Background animated diagonal red-black wave */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: linear-gradient(135deg, #8B0000, #000000 40%, #000000 60%, #8B0000);
-  background-size: 300% 300%;
-  animation: bgMove 12s linear infinite;
+  background: linear-gradient(135deg,#8B0000,#000 40%,#000 60%,#8B0000);
+  background-size: 400% 400%;
+  animation: bgMove 20s linear infinite;
   z-index: -1;
 }
 
-@keyframes bgMove {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 100% 100%; }
+@keyframes bgMove{
+  0% {background-position:0% 0%;}
+  25% {background-position:100% 100%;}
+  50% {background-position:0% 100%;}
+  75% {background-position:100% 0%;}
+  100% {background-position:0% 0%;}
 }
 
-/* Login Page */
+/* LOGIN PAGE */
 #loginPage {
   height: 100vh;
   display: flex;
@@ -61,11 +59,7 @@ body::before {
   border-image: var(--insta-gradient) 1;
 }
 
-.login-box h2 {
-  margin-bottom: 15px;
-  font-weight: 500;
-}
-
+.login-box h2 { margin-bottom: 15px; font-weight: 500; }
 .login-user {
   font-size: 22px;
   font-weight: 600;
@@ -75,271 +69,234 @@ body::before {
   color: transparent;
   transition: 0.3s ease;
 }
+.login-user:hover { transform: scale(1.1); }
+.login-note { opacity:0.8; margin-top:10px; font-size:0.95rem; }
 
-.login-user:hover {
-  transform: scale(1.1);
-}
+/* PORTFOLIO */
+#portfolio { display:none; padding:30px; max-width:1200px; margin:auto; }
 
-/* Portfolio */
-#portfolio {
-  display: none;
-  padding: 30px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-/* Profile Section */
-.profile {
-  text-align: center;
-}
-
+/* PROFILE */
+.profile { text-align:center; margin-bottom:30px; }
 .profile img {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  padding: 4px;
+  width:140px; height:140px;
+  border-radius:50%;
+  padding:4px;
   background: var(--insta-gradient);
-  object-fit: cover;
+  object-fit:cover;
 }
-
 .profile h1 {
-  margin-top: 15px;
-  font-family: 'ADLaM Display', cursive;
-  font-size: 28px;
+  margin-top:15px;
+  font-family:'ADLaM Display',cursive;
+  font-size:28px;
   color: var(--neon-red);
   text-shadow: 0 0 10px var(--neon-red);
 }
-
 .profile p {
-  margin-top: 10px;
-  font-size: 16px;
-  opacity: 0.9;
+  margin-top:10px;
+  font-size:16px;
+  opacity:0.9;
 }
 
-/* Rectangular Tiles */
-.top-tiles {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 25px;
-  flex-wrap: wrap;
-}
-
+/* TOP RECTANGLE TILES */
+.top-tiles { display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-top:25px; }
 .rect-tile {
-  padding: 15px 30px;
-  border-radius: 15px;
-  background: var(--insta-gradient);
+  padding:15px 30px;
+  border-radius:15px;
+  background: rgba(0,0,0,0.3);
+  border:2px solid var(--insta-gradient);
   color: var(--neon-red);
-  font-size: 18px;
-  text-shadow: 0 0 10px var(--neon-red);
-  cursor: pointer;
+  font-size:18px;
+  text-shadow: 0 0 8px var(--neon-red);
+  cursor:pointer;
   transition: 0.3s ease;
 }
-
 .rect-tile:hover {
-  box-shadow: 0 0 20px var(--neon-red);
+  background: rgba(255,255,255,0.1);
+  color:white;
+  font-weight:bold;
+  box-shadow: 0 0 15px var(--neon-red);
   transform: translateY(-5px);
 }
 
 /* Divider */
-.divider {
-  height: 2px;
-  background: var(--insta-gradient);
-  margin: 30px 0;
-}
+.divider { height:2px; background: linear-gradient(to right,transparent,red,transparent); margin:30px 0; }
 
-/* Main Tiles Grid */
-.grid {
-  display: grid;
-  gap: 25px;
-}
-
-/* Laptop 3x2 */
-@media (min-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* Mobile */
-@media (max-width: 767px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-}
+/* MAIN GRID TILES */
+.grid { display:grid; gap:25px; }
+@media (min-width:768px){ .grid{grid-template-columns:repeat(3,1fr);} }
+@media (max-width:767px){ .grid{grid-template-columns:1fr;} }
 
 .tile {
-  height: 160px;
-  border-radius: 18px;
-  background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'ADLaM Display', cursive;
-  font-size: 20px;
-  letter-spacing: 2px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: 0.4s ease;
+  height:160px;
+  border-radius:18px;
+  background: rgba(0,0,0,0.5);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'ADLaM Display',cursive;
+  font-size:20px;
+  letter-spacing:2px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:0.4s ease;
 }
-
 .tile::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 18px;
-  padding: 2px;
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:18px;
+  padding:2px;
   background: var(--insta-gradient);
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
+  -webkit-mask: linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 }
-
 .tile span {
   color: var(--neon-red);
-  text-shadow: 0 0 10px var(--neon-red);
-  z-index: 1;
+  text-shadow:0 0 10px var(--neon-red);
+  z-index:1;
 }
-
-/* Hover Effects */
 .tile:hover {
   transform: scale(1.05);
-  background: var(--insta-gradient);
-  box-shadow: 0 0 25px var(--neon-red);
+  background: rgba(255,255,255,0.1); /* subtle instagram gradient fill */
+  box-shadow:0 0 25px var(--neon-red);
+  color:white;
+  font-weight:bold;
 }
 
-/* Modal Tarot Flip */
+/* MODAL / TAROT CARD */
 .modal {
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
+  inset:0;
+  background: rgba(0,0,0,0.85);
   display: none;
-  justify-content: center;
-  align-items: center;
+  justify-content:center;
+  align-items:center;
+  backdrop-filter:blur(8px);
+  pointer-events: auto;
+  z-index: 9999;
 }
 
-.modal-card {
-  width: 350px;
-  height: 450px;
-  perspective: 1000px;
-}
+.modal.active { display:flex; }
 
+.modal-card { width:350px; height:450px; perspective:1000px; }
 .card-inner {
-  width: 100%;
-  height: 100%;
+  width:100%; height:100%;
   transition: transform 0.8s;
   transform-style: preserve-3d;
-  position: relative;
+  position:relative;
 }
+.card-inner.flip { transform:rotateY(180deg); }
 
-.flip .card-inner {
-  transform: rotateY(180deg);
+.card-front, .card-back {
+  position:absolute;
+  width:100%; height:100%;
+  border-radius:20px;
+  backface-visibility:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  text-align:center;
 }
-
-.card-front,
-.card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  backface-visibility: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--insta-gradient);
-  color: black;
-  padding: 20px;
-  text-align: center;
+.card-front {
+  background: rgba(255,255,255,0.1);
+  font-family:'ADLaM Display',cursive;
+  font-size:22px;
+  color:white;
 }
-
-.card-back {
-  transform: rotateY(180deg);
-  background: black;
-  color: white;
+.card-back { 
+  background:black; 
+  color:white;
+  transform:rotateY(180deg);
+  overflow:auto;
 }
-
 .close-btn {
-  position: absolute;
-  top: 20px;
-  right: 25px;
-  font-size: 22px;
-  cursor: pointer;
+  position:absolute;
+  top:20px;
+  right:25px;
+  font-size:22px;
+  cursor:pointer;
+  color:white;
+  font-weight:bold;
 }
 </style>
 </head>
 
 <body>
 
-<!-- Login -->
+<!-- LOGIN -->
 <div id="loginPage">
   <div class="login-box">
     <h2>User ID</h2>
     <div class="login-user" onclick="enterPortfolio()">@SruthikaaBala</div>
-    <p style="margin-top:10px;">Please select your user ID to login</p>
+    <p class="login-note">Login to the above user ID to experience the profile</p>
   </div>
 </div>
 
-<!-- Portfolio -->
+<!-- PORTFOLIO -->
 <div id="portfolio">
+  <div class="profile">
+    <img src="portfolio picture.jpg" alt="Profile Picture">
+    <h1>Sruthikaa Bala</h1>
+    <p>Digital marketing aspirant transitioning from executive assistance at McKinsey. Focused on brand strategy, content and premium positioning.</p>
+  </div>
 
-<div class="profile">
-  <img src="portfolio picture.jpg" alt="Profile Picture">
-  <h1>Sruthikaa Bala</h1>
-  <p>Digital marketing aspirant transitioning from executive assistance at McKinsey. Focused on brand strategy, content and premium positioning.</p>
+  <div class="top-tiles">
+    <div class="rect-tile" onclick="openModal('Contact info here')">Contact</div>
+    <div class="rect-tile" onclick="openModal('Message info here')">Message</div>
+    <div class="rect-tile" onclick="openModal('Resume link/info')">Resume</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="grid">
+    <div class="tile" onclick="openModal('Education details here')"><span>EDUCATION</span></div>
+    <div class="tile" onclick="openModal('Experience details here')"><span>EXPERIENCE</span></div>
+    <div class="tile" onclick="openModal('Skills details here')"><span>SKILLS</span></div>
+    <div class="tile" onclick="openModal('Projects details here')"><span>PROJECTS</span></div>
+    <div class="tile" onclick="openModal('Certifications here')"><span>CERTIFICATIONS</span></div>
+    <div class="tile" onclick="openModal('Achievements here')"><span>ACHIEVEMENTS</span></div>
+  </div>
 </div>
 
-<div class="top-tiles">
-  <div class="rect-tile">Contact</div>
-  <div class="rect-tile">Message</div>
-  <div class="rect-tile">Resume</div>
-</div>
-
-<div class="divider"></div>
-
-<div class="grid">
-  <div class="tile" onclick="openModal('Education details here')"><span>EDUCATION</span></div>
-  <div class="tile" onclick="openModal('Experience details here')"><span>EXPERIENCE</span></div>
-  <div class="tile" onclick="openModal('Skills details here')"><span>SKILLS</span></div>
-  <div class="tile" onclick="openModal('Projects details here')"><span>PROJECTS</span></div>
-  <div class="tile" onclick="openModal('Certifications here')"><span>CERTIFICATIONS</span></div>
-  <div class="tile" onclick="openModal('Achievements here')"><span>ACHIEVEMENTS</span></div>
-</div>
-
-</div>
-
-<!-- Modal -->
+<!-- MODAL -->
 <div class="modal" id="modal">
   <div class="close-btn" onclick="closeModal()">✕</div>
-  <div class="modal-card" id="modalCard">
-    <div class="card-inner">
-      <div class="card-front">Loading...</div>
-      <div class="card-back" id="modalContent"></div>
+  <div class="modal-card">
+    <div class="card-inner" id="cardInner">
+      <div class="card-front" id="cardFront">Loading...</div>
+      <div class="card-back" id="cardBack"></div>
     </div>
   </div>
 </div>
 
 <script>
-function enterPortfolio() {
-  document.getElementById("loginPage").style.display = "none";
-  document.getElementById("portfolio").style.display = "block";
+function enterPortfolio(){
+  document.getElementById("loginPage").style.display="none";
+  document.getElementById("portfolio").style.display="block";
 }
 
-function openModal(content) {
-  const modal = document.getElementById("modal");
-  const modalCard = document.getElementById("modalCard");
-  document.getElementById("modalContent").innerText = content;
-  modal.style.display = "flex";
-  setTimeout(() => modalCard.classList.add("flip"), 200);
+let modal = document.getElementById("modal");
+let cardInner = document.getElementById("cardInner");
+let cardFront = document.getElementById("cardFront");
+let cardBack = document.getElementById("cardBack");
+
+function openModal(content){
+  modal.classList.add('active');
+  cardFront.innerText = content.split(' ')[0]; // title
+  cardBack.innerText = content; // details
+  cardInner.classList.add('flip');
+
+  // Disable scrolling/interactions on background
+  document.body.style.overflow = 'hidden';
 }
 
-function closeModal() {
-  const modal = document.getElementById("modal");
-  const modalCard = document.getElementById("modalCard");
-  modalCard.classList.remove("flip");
-  setTimeout(() => modal.style.display = "none", 600);
+function closeModal(){
+  cardInner.classList.remove('flip');
+  setTimeout(()=>{ modal.classList.remove('active'); },500);
+  document.body.style.overflow = 'auto';
 }
 </script>
 
